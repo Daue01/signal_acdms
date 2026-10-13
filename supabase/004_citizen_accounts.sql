@@ -1,0 +1,17 @@
+-- Allow self-registered citizens while keeping one profile per auth user.
+alter type user_role add value if not exists 'citizen';
+
+create or replace function public.handle_new_user() returns trigger
+language plpgsql security definer set search_path = public, pg_temp as $$
+declare requested_role text;
+begin
+  requested_role := case when new.raw_user_meta_data->>'account_type' = 'citizen'
+    then 'citizen' else 'enumerator' end;
+  insert into public.profiles(user_id, full_name, role, is_active)
+  values (new.id, coalesce(new.raw_user_meta_data->>'full_name', new.email, 'Unnamed user'),
+          requested_role::user_role, requested_role = 'citizen')
+  on conflict (user_id) do nothing;
+  return new;
+end $$;
+
+alter function public.handle_new_user() set search_path = public, pg_temp;

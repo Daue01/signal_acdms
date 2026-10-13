@@ -1,0 +1,135 @@
+[
+  {
+    "slug": "lagos",
+    "name": "Lagos",
+    "capital": "Ikeja",
+    "region": "South West",
+    "nickname": "Centre of Excellence",
+    "known_for": [
+      "Commerce and trade",
+      "Finance and banking",
+      "Nollywood and entertainment",
+      "Ports and shipping"
+    ],
+    "history": "Lagos began as a Yoruba settlement and later an important port in the trans-Atlantic trade before becoming a British colony in 1861. It served as Nigeria's capital from 1914 until 1991, when the federal capital moved to Abuja. Rapid growth through the twentieth century made it the country's main commercial and industrial centre.",
+    "economy": "Lagos has the largest economy of any Nigerian state and one of the largest in Africa, driven by finance, manufacturing, shipping and ports, technology start-ups, and a large informal trading sector. It hosts the country's main seaports and stock exchange.",
+    "fun_facts": [
+      "Lagos is Nigeria's most populous state despite being its smallest by land area.",
+      "It was the federal capital until Abuja took over in 1991.",
+      "Its deep-water ports handle a large share of Nigeria's imports and exports."
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Lagos_State",
+      "https://en.wikipedia.org/wiki/History_of_Lagos"
+    ],
+    "images": [
+      {
+        "title": "Third Mainland Bridge, Lagos",
+        "commons_url": "https://commons.wikimedia.org/wiki/Category:Lagos",
+        "license": "Varies by file (mostly CC BY-SA 4.0) — check each file page before use"
+      }
+    ]
+  },
+  {
+    "slug": "rivers",
+    "name": "Rivers",
+    "capital": "Port Harcourt",
+    "region": "South South",
+    "nickname": "Treasure Base of the Nation",
+    "known_for": [
+      "Crude oil and gas production",
+      "Oil refining",
+      "Seaports",
+      "Garden City (Port Harcourt)"
+    ],
+    "history": "The area was part of the Oil Rivers Protectorate from 1885, later the Niger Coast Protectorate, before joining the colony of Southern Nigeria. Rivers State was created in 1967 from the former Eastern Region, built around the oil-rich Niger Delta.",
+    "economy": "Rivers is Nigeria's leading oil-producing state, hosting a large share of onshore crude production, two major refineries, and key petroleum infrastructure. Port Harcourt is considered the commercial centre of the Nigerian oil industry, with significant port and logistics activity.",
+    "fun_facts": [
+      "Over 60% of Nigeria's crude oil has historically come from Rivers State.",
+      "Port Harcourt is nicknamed the Garden City.",
+      "The state is home to over 30 indigenous languages and dialects."
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Rivers_State",
+      "https://en.wikipedia.org/wiki/Outline_of_Rivers_State"
+    ],
+    "images": [
+      {
+        "title": "Port Harcourt street and city scenes",
+        "commons_url": "https://commons.wikimedia.org/wiki/Category:Port_Harcourt",
+        "license": "Varies by file (mostly CC BY-SA 4.0 / CC BY 4.0) — check each file page before use"
+      },
+      {
+        "title": "Rivers State general category",
+        "commons_url": "https://commons.wikimedia.org/wiki/Category:Rivers_State",
+        "license": "Varies by file — check each file page before use"
+      }
+    ]
+  },
+  {
+    "slug": "enugu",
+    "name": "Enugu",
+    "capital": "Enugu",
+    "region": "South East",
+    "nickname": "Coal City State",
+    "known_for": [
+      "Coal mining (historic)",
+      "Education",
+      "Growing tech start-up scene"
+    ],
+    "history": "Coal was discovered at Udi Hills in 1909, and the resulting mining boom turned Enugu into a major colonial industrial centre, giving it the name 'Coal City'. It served as the capital of the old Eastern Region and briefly as the Biafran capital during the civil war, before Enugu State itself was created in 1991 from Anambra State.",
+    "economy": "Coal mining dominated the economy through the mid-twentieth century; today Enugu's economy is more diversified, with a notable technology start-up ecosystem (home to companies such as Xend Finance), education, trade, and public administration as major employers.",
+    "fun_facts": [
+      "Enugu is nicknamed the Coal City due to its early twentieth-century mining boom.",
+      "It briefly served as the capital of the breakaway state of Biafra.",
+      "Its start-up ecosystem is ranked among the top in Nigeria."
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Enugu_State",
+      "https://en.wikipedia.org/wiki/Enugu_(city)"
+    ],
+    "images": [
+      {
+        "title": "Enugu city panorama",
+        "commons_url": "https://commons.wikimedia.org/wiki/File:Enugu_panorama1.jpg",
+        "license": "Check file page — mixed/derivative licensing noted on source"
+      },
+      {
+        "title": "Enugu cityscape",
+        "commons_url": "https://commons.wikimedia.org/wiki/File:Enugu.jpg",
+        "license": "Check file page before use"
+      }
+    ]
+  },
+  {
+    "slug": "kano",
+    "name": "Kano",
+    "capital": "Kano",
+    "region": "North West",
+    "nickname": "Centre of Commerce",
+    "known_for": [
+      "Trans-Saharan and regional trade",
+      "Textiles and leather",
+      "Agriculture (kola nut, grains)",
+      "Islamic scholarship and historic architecture"
+    ],
+    "history": "Kano has one of the longest urban histories in West Africa, rising as a major Hausa city-state and a key hub of trans-Saharan trade, craft production and Islamic scholarship centuries before colonial rule. The British conquered the Kano Emirate in 1903, incorporating it into the Northern Nigeria Protectorate; modern Kano State was formed in 1968.",
+    "economy": "Kano is the second-largest industrial and commercial centre in Nigeria, with strength in textiles, leather and hides, agricultural produce trading (including one of Africa's largest grain markets, Dawanau Market), and Islamic banking. The centuries-old Kurmi Market remains active today.",
+    "fun_facts": [
+      "Kurmi Market, opened in the 15th century, is still operating today.",
+      "Dawanau Market is reputed to be the largest grains market in Africa.",
+      "Kano was historically a key stop on trans-Saharan trade routes."
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Kano_State",
+      "https://en.wikipedia.org/wiki/Kano_(city)"
+    ],
+    "images": [
+      {
+        "title": "Gidan Makama Museum, Kano",
+        "commons_url": "https://commons.wikimedia.org/wiki/Category:Kano",
+        "license": "Check file page — CC BY-SA 3.0/4.0 variants present"
+      }
+    ]
+  }
+]
