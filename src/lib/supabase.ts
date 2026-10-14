@@ -9,4 +9,13 @@ export const supabaseConfigured=Boolean(url&&anonKey);
 export const supabase=createClient(
   url??'https://placeholder.supabase.co',
   anonKey??'missing-anon-key',
+  {
+    auth:{
+      // The callback page explicitly exchanges the confirmation code.
+      // Keeping URL detection off prevents the browser client from racing
+      // that exchange and consuming the one-time code first.
+      flowType:'pkce',
+      detectSessionInUrl:false,
+    },
+  },
 );
