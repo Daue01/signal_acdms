@@ -15,3 +15,11 @@ begin
 end $$;
 
 alter function public.handle_new_user() set search_path = public, pg_temp;
+
+-- Ensure this migration repairs projects where 002 was not applied, or where
+-- the trigger was removed during a reset. New Auth users need a profile row
+-- before the application can display or approve their account.
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
