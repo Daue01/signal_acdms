@@ -2,9 +2,9 @@
 
 import {useState} from 'react';
 import nigeriaGeo from '@/data/ng.json';
-import pilotData from '@/data/states_pilot.json';
+import pilotData from '@/data/states.json';
 
-type PilotState={slug:string;name:string;capital:string;region:string;nickname:string;known_for:string[];history:string;economy:string;fun_facts:string[];sources:string[];images:{title:string;commons_url:string;license:string}[]};
+type PilotState={slug:string;iso_code:string;name:string;capital:string;region:string;nickname:string;known_for:string[];history:string;economy:string;fun_facts:string[];sources:string[];images:{title:string;commons_url?:string;url?:string;license?:string;license_note?:string}[]};
 type StateInfo={name:string;code:string;capital:string;zone:string;population:string;signal:string;story:string;pilot?:PilotState};
 type GeoFeature={properties:{id:string;name:string};geometry:{type:string;coordinates:any}};
 
@@ -15,6 +15,7 @@ const signalByZone:Record<string,string>={'North West':'Market index','North Eas
 const stories:Record<string,string>={Lagos:'Nigeria’s engine room: a restless, creative megacity on the Atlantic edge.',Kano:'A global northern city where commerce, fashion, enterprise and history meet.',Abuja:'Nigeria’s federal city: a fast-growing meeting point for people, ideas and opportunity.',default:'A place of layered history, community energy and everyday possibility.'};
 const features=(nigeriaGeo as {features:GeoFeature[]}).features;
 const pilotByName=Object.fromEntries((pilotData as PilotState[]).map(state=>[state.name,state]));
+pilotByName['Federal Capital Territory']=pilotByName['Federal Capital Territory (Abuja)'];
 const info=(name:string):StateInfo=>{const clean=name==='Federal Capital Territory'?'FCT':name;const pilot=pilotByName[name]||pilotByName[clean];const zone=zoneByState[name]||zoneByState[clean]||'Nigeria';return{name:clean,code:clean==='FCT'?'FC':clean.slice(0,2).toUpperCase(),capital:pilot?.capital||capitalByState[name]||'—',zone,population:populationByState[name]||populationByState.default,signal:pilot?.known_for?.slice(0,2).join(' · ')||pilot?.nickname||signalByZone[zone]||'Community pulse',story:pilot?`${pilot.history} ${pilot.economy}`:stories[name]||stories.default,pilot}};
 const points:number[][]=[];const collect=(v:any)=>{if(Array.isArray(v)&&typeof v[0]==='number')points.push(v);else if(Array.isArray(v))v.forEach(collect)};features.forEach(f=>collect(f.geometry.coordinates));
 const lons=points.map(p=>p[0]),lats=points.map(p=>p[1]);const bounds={minLon:Math.min(...lons),maxLon:Math.max(...lons),minLat:Math.min(...lats),maxLat:Math.max(...lats)};
