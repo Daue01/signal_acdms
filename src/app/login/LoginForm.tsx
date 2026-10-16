@@ -14,7 +14,7 @@ export default function LoginForm({portal}:{portal:Portal}){
   setError('');setNotice('');if(!supabaseConfigured)return setError('Supabase is not configured.');
   if(signup){
    if(!name.trim())return setError('Please enter your full name.');
-   const {data,error}=await supabase.auth.signUp({email,password,options:{data:{full_name:name.trim(),account_type:portal},emailRedirectTo:`${window.location.origin}/auth/callback?portal=${portal}`}});
+   const {data,error}=await supabase.auth.signUp({email,password,options:{data:{full_name:name.trim(),account_type:portal},emailRedirectTo:`${window.location.origin}/auth/callback`}});
    if(error)return setError(error.message);
    if(data.user)return setNotice(portal==='citizen'?'Citizen account created. Verify your email to sign in; no administrator approval is needed.':'Account created. Check your email and click the confirmation link before signing in.');
    return setNotice('Check your email for the confirmation link.');

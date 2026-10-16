@@ -33,7 +33,13 @@ function AdminView(){
   const failures=[progress.error,flags.error,users.error,logs.error].filter(Boolean);
   if(failures.length){
    console.error('Could not load admin dashboard data:',{progress:progress.error,duplicateFlags:flags.error,profiles:users.error,auditLog:logs.error});
-   setMsg('Admin dashboard data is not fully set up. Run the Supabase SQL scripts listed in README.md, then refresh this page.');
+   const details=[
+    progress.error&&`ea_progress: ${progress.error.message}`,
+    flags.error&&`duplicate_flags: ${flags.error.message}`,
+    users.error&&`profiles: ${users.error.message}`,
+    logs.error&&`audit_log: ${logs.error.message}`,
+   ].filter(Boolean).join(' | ');
+   setMsg(`Admin dashboard setup error: ${details} Run the Supabase SQL scripts listed in README.md, then refresh this page.`);
   }else{
    setMsg('');
   }
