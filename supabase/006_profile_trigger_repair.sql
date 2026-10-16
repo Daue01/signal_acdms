@@ -1,5 +1,5 @@
 -- Repair existing projects where Auth users were created without profiles.
--- Run once in the Supabase SQL Editor after schema.sql.
+-- Run once in the Supabase SQL Editor after 004_citizen_accounts.sql.
 begin;
 
 create or replace function public.handle_new_user() returns trigger

@@ -5,21 +5,22 @@ import {supabase,supabaseConfigured} from '@/lib/supabase';
 import {HOME,Role} from '@/lib/roles';
 
 type Portal='citizen'|'enumerator'|'administrator';
-const portalCopy={citizen:{title:'Citizen portal',description:'Explore, contribute and stay connected to your community.',signup:true},enumerator:{title:'Enumerator portal',description:'Capture field data securely, even when the network is unavailable.',signup:true},administrator:{title:'Superadmin portal',description:'Approve enumerators, manage areas and monitor census operations.',signup:false}} as const;
+const portalCopy={citizen:{title:'Citizen portal',description:'Create a citizen account with email verification. No administrator approval is needed.',signup:true},enumerator:{title:'Enumerator portal',description:'Capture field data securely, even when the network is unavailable.',signup:true},administrator:{title:'Superadmin portal',description:'Approve enumerators, manage areas and monitor census operations.',signup:false}} as const;
 
 export default function LoginForm({portal}:{portal:Portal}){
- const copy=portalCopy[portal];const[signup,setSignup]=useState(false);const[name,setName]=useState('');const[email,setEmail]=useState('');const[password,setPassword]=useState('');const[error,setError]=useState('');const[notice,setNotice]=useState('');
- useEffect(()=>{if(typeof window!=='undefined'&&new URLSearchParams(window.location.search).get('confirmed')==='1')setNotice('Email confirmed. You can now sign in.');},[]);
+ const copy=portalCopy[portal];const[signup,setSignup]=useState(portal==='citizen');const[name,setName]=useState('');const[email,setEmail]=useState('');const[password,setPassword]=useState('');const[error,setError]=useState('');const[notice,setNotice]=useState('');
+ useEffect(()=>{if(typeof window!=='undefined'&&new URLSearchParams(window.location.search).get('confirmed')==='1'){setSignup(false);setNotice('Email confirmed. You can now sign in.');}},[]);
  async function submit(){
   setError('');setNotice('');if(!supabaseConfigured)return setError('Supabase is not configured.');
   if(signup){
    if(!name.trim())return setError('Please enter your full name.');
    const {data,error}=await supabase.auth.signUp({email,password,options:{data:{full_name:name.trim(),account_type:portal},emailRedirectTo:`${window.location.origin}/auth/callback?portal=${portal}`}});
    if(error)return setError(error.message);
-   if(data.user)return setNotice('Account created. Check your email and click the confirmation link before signing in.');
+   if(data.user)return setNotice(portal==='citizen'?'Citizen account created. Verify your email to sign in; no administrator approval is needed.':'Account created. Check your email and click the confirmation link before signing in.');
    return setNotice('Check your email for the confirmation link.');
   }
   const{data,error}=await supabase.auth.signInWithPassword({email,password});if(error)return setError(error.message);
+  if(portal==='citizen'&&!data.user.email_confirmed_at){await supabase.auth.signOut();return setError('Please verify your email before signing in.');}
   const{data:profile,error:profileError}=await supabase.from('profiles').select('role,is_active').eq('user_id',data.user.id).single();
   if(profileError||!profile)return setError('Your account profile is not ready. Contact the administrator.');
   if(!profile.is_active)return setError('Your account is awaiting administrator approval.');
