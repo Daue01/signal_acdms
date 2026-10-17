@@ -5,7 +5,7 @@
 
 update public.profiles
 set role = 'administrator', is_active = true
-where user_id = 'REPLACE_WITH_AUTH_USER_UUID'::uuid;
+where user_id = '5930bf3d-e75c-4d0e-ae4b-08c12a6302c6'::uuid;
 
 -- Verify the promotion:
 -- select user_id, full_name, role, is_active from public.profiles
