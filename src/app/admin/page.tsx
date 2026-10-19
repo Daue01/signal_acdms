@@ -110,7 +110,7 @@ function AdminView(){
    </table></div>:<p className="empty-state">No enumerators are awaiting approval.</p>}
   </section>
   <section className="admin-panel">
-   <div className="panel-heading"><div><p className="eyebrow">02 / Field management</p><h2>Enumeration areas</h2></div><span>{eas.length} areas</span></div>
+   <div className="panel-heading"><div><p className="eyebrow">02 / Field management</p><h2>Enumeration areas</h2><a className="text-link" href="https://www.nationalpopulation.gov.ng/EAD?utm_source=chatgpt.com" target="_blank" rel="noreferrer">Open NPC EAD source <span>↗</span></a></div><span>{eas.length} areas</span></div>
    <div className="ea-form">
     <input placeholder="EA code" value={eaCode} onChange={event=>setEaCode(event.target.value)}/>
     <input placeholder="State" value={state} onChange={event=>setState(event.target.value)}/>
