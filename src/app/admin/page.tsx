@@ -20,8 +20,12 @@ function AdminView(){
  const[ward,setWard]=useState('');
  const[eaCode,setEaCode]=useState('');
  const[target,setTarget]=useState('120');
+ const[assignmentEA,setAssignmentEA]=useState('');
+ const[assignmentEnumerator,setAssignmentEnumerator]=useState('');
  const[msg,setMsg]=useState('');
  const[approving,setApproving]=useState<string|null>(null);
+ const[assigning,setAssigning]=useState(false);
+ const[currentUserId,setCurrentUserId]=useState<string|null>(null);
 
  async function load(){
   const[progress,flags,users,logs]=await Promise.all([
@@ -50,6 +54,7 @@ function AdminView(){
  }
 
  useEffect(()=>{
+  void supabase.auth.getUser().then(({data})=>setCurrentUserId(data.user?.id??null));
   void load();
   const channel=supabase.channel('admin-progress')
    .on('postgres_changes',{event:'*',schema:'public',table:'households'},()=>void load())
@@ -77,6 +82,17 @@ function AdminView(){
   const{error}=await supabase.from('enumeration_areas').insert({ea_code:eaCode,state,lga,ward,target_households:+target});
   setMsg(error?.message??'Enumeration area created.');
   if(!error){setEaCode('');setState('');setLga('');setWard('');void load()}
+ }
+
+ async function assignEA(){
+  if(!assignmentEA||!assignmentEnumerator){setMsg('Choose an enumeration area and an active enumerator.');return}
+  setAssigning(true);
+  const{error}=await supabase.from('enumeration_areas').update({assigned_enumerator_id:assignmentEnumerator}).eq('ea_id',assignmentEA);
+  const selectedEA=eas.find(e=>e.ea_id===assignmentEA);
+  const selectedProfile=profiles.find(profile=>profile.user_id===assignmentEnumerator);
+  setMsg(error?.message??`${selectedEA?.ea_code??'Enumeration area'} assigned to ${selectedProfile?.full_name??'enumerator'}.`);
+  setAssigning(false);
+  if(!error){setAssignmentEA('');setAssignmentEnumerator('');void load()}
  }
 
  async function review(id:string,status:'confirmed'|'dismissed'){
@@ -119,6 +135,19 @@ function AdminView(){
     <input type="number" placeholder="Target HH" value={target} onChange={event=>setTarget(event.target.value)}/>
     <button onClick={createEA}>Create EA</button>
    </div>
+   <div className="ea-assignment">
+    <div><p className="eyebrow">Assign fieldwork</p><strong>Assign an existing area to an active enumerator</strong><span>Reassigning an area replaces its current enumerator.</span></div>
+    <select aria-label="Enumeration area to assign" value={assignmentEA} onChange={event=>setAssignmentEA(event.target.value)} disabled={!eas.length||!profiles.some(profile=>profile.role==='enumerator'&&profile.is_active)}>
+     <option value="">Select enumeration area</option>
+     {eas.map(e=><option key={e.ea_id} value={e.ea_id}>{e.ea_code} · {e.state} / {e.lga} / {e.ward}</option>)}
+    </select>
+    <select aria-label="Enumerator to assign" value={assignmentEnumerator} onChange={event=>setAssignmentEnumerator(event.target.value)} disabled={!profiles.some(profile=>profile.role==='enumerator'&&profile.is_active)}>
+     <option value="">Select active enumerator</option>
+     {profiles.filter(profile=>profile.role==='enumerator'&&profile.is_active).map(profile=><option key={profile.user_id} value={profile.user_id}>{profile.full_name}</option>)}
+    </select>
+    <button onClick={()=>void assignEA()} disabled={assigning||!assignmentEA||!assignmentEnumerator||profiles.find(profile=>profile.user_id===currentUserId)?.role!=='administrator'}>{assigning?'Assigning…':'Assign area'}</button>
+   </div>
+   {!profiles.some(profile=>profile.role==='enumerator'&&profile.is_active)&&<p className="empty-state">Approve an active enumerator before assigning an area.</p>}
    <div className="admin-table-wrap"><table className="admin-table">
     <thead><tr><th>EA</th><th>Location</th><th>Enumerator</th><th>Progress</th><th>People</th></tr></thead>
     <tbody>{eas.map(e=><tr key={e.ea_id}><td>{e.ea_code}</td><td>{e.state} / {e.lga} / {e.ward}</td><td>{e.enumerator??'Unassigned'}</td><td>{e.registered_households}/{e.target_households} ({e.pct}%)</td><td>{e.individuals}</td></tr>)}</tbody>
