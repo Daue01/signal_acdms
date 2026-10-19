@@ -82,7 +82,7 @@ function EnumeratorView(){
     <p className="eyebrow">Enumerator workspace</p>
     <h1>Citizen interviews</h1>
     <p>Record household answers on behalf of residents in your assigned area. Interviews can be saved offline and synchronized when you reconnect.</p>
-    <p>{ea?`${ea.ea_code} · ${ea.state} · ${ea.lga} · ${ea.ward}`:'No assigned enumeration area cached'}</p>
+    <p>{ea?`${ea.ea_code} · ${ea.state} · ${ea.lga} · ${ea.ward}`:'No assigned enumeration area cached'}</p><p><a className="text-link" href="/enumerator/review">Review citizen submissions ↗</a></p>
    </div>
    <div className={online?'connection online':'connection'}><span/>{online?'Online':'Offline'}<button type="button" onClick={()=>void sync()}>Pending: {pending} · Sync</button></div>
   </div>

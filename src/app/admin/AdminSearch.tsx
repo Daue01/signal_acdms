@@ -1,0 +1,11 @@
+'use client';
+
+import {useEffect, useState} from 'react';
+import {supabase} from '@/lib/supabase';
+
+type Result={kind:string;record_id:string;label:string;detail:string};
+export default function AdminSearch(){
+ const[q,setQ]=useState('');const[reason,setReason]=useState('');const[results,setResults]=useState<Result[]>([]);const[message,setMessage]=useState('');const[open,setOpen]=useState(false);const[page,setPage]=useState(1);const[hasMore,setHasMore]=useState(false);
+ useEffect(()=>{if(q.trim().length<2||reason.trim().length<5){setResults([]);setMessage('');setHasMore(false);return}const timer=window.setTimeout(()=>{void (async()=>{const{data:{session}}=await supabase.auth.getSession();if(!session)return;const response=await fetch(`/api/admin/search?q=${encodeURIComponent(q)}&reason=${encodeURIComponent(reason)}&page=${page}`,{headers:{Authorization:`Bearer ${session.access_token}`}});const body=await response.json();if(!response.ok){setMessage(body.error??'Search failed.');return}const next=(body.results??[]) as Result[];setResults(next);setHasMore(next.length===20);setMessage('')})()},350);return()=>window.clearTimeout(timer)},[q,reason,page]);
+ return <div className="admin-search"><label className="sr-only" htmlFor="admin-search-reason">Search reason</label><input id="admin-search-reason" placeholder="Reason for lookup (required)" value={reason} onChange={event=>{setReason(event.target.value);setPage(1)}}/><label className="sr-only" htmlFor="admin-global-search">Search admin records</label><input id="admin-global-search" placeholder="Search EAs, geography, users, references…" value={q} onFocus={()=>setOpen(true)} onChange={event=>{setQ(event.target.value);setPage(1)}}/>{open&&q.trim().length>=2&&reason.trim().length>=5&&<div className="admin-search-results">{message&&<p>{message}</p>}{!message&&!results.length&&<p>No matching records.</p>}{results.map(result=><div key={`${result.kind}-${result.record_id}`}><strong>{result.label}</strong><span>{result.kind} · {result.detail}</span></div>)}<div><button type="button" disabled={page===1} onClick={()=>setPage(current=>Math.max(1,current-1))}>Previous</button><button type="button" disabled={!hasMore} onClick={()=>setPage(current=>current+1)}>Next</button></div><button type="button" onClick={()=>setOpen(false)}>Close</button></div>}</div>
+}

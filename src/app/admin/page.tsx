@@ -3,10 +3,16 @@
 import {useEffect, useState} from 'react';
 import {supabase} from '@/lib/supabase';
 import {RequireRole} from '@/lib/guard';
-import CitizenSubmissions from './CitizenSubmissions';
+import AdminResolutionQueue from './AdminResolutionQueue';
+import AdminSearch from './AdminSearch';
+import PopulationAggregates from './PopulationAggregates';
+import SensitiveIndicatorLookup from './SensitiveIndicatorLookup';
 
 type EA={ea_id:string;ea_code:string;state:string;lga:string;ward:string;enumerator:string|null;target_households:number;registered_households:number;individuals:number;pct:number};
 type Profile={user_id:string;full_name:string;role:string;is_active:boolean;created_at:string};
+type GeoState={state_id:number;name:string};
+type GeoLga={lga_id:number;state_id:number;name:string};
+type GeoWard={ward_id:number;lga_id:number;name:string};
 type DuplicateFlag={flag_id:string;kind:string;reason:string|null;status:string};
 type AuditEntry={audit_id:number;table_name:string;record_id:string|null;action:string;changed_by:string|null;changed_at:string};
 
@@ -15,9 +21,10 @@ function AdminView(){
  const[dups,setDups]=useState<DuplicateFlag[]>([]);
  const[profiles,setProfiles]=useState<Profile[]>([]);
  const[audit,setAudit]=useState<AuditEntry[]>([]);
- const[state,setState]=useState('');
- const[lga,setLga]=useState('');
- const[ward,setWard]=useState('');
+ const[geoStates,setGeoStates]=useState<GeoState[]>([]);const[geoLgas,setGeoLgas]=useState<GeoLga[]>([]);const[geoWards,setGeoWards]=useState<GeoWard[]>([]);
+ const[stateId,setStateId]=useState('');
+ const[lgaId,setLgaId]=useState('');
+ const[wardId,setWardId]=useState('');
  const[eaCode,setEaCode]=useState('');
  const[target,setTarget]=useState('120');
  const[assignmentEA,setAssignmentEA]=useState('');
@@ -28,13 +35,16 @@ function AdminView(){
  const[currentUserId,setCurrentUserId]=useState<string|null>(null);
 
  async function load(){
-  const[progress,flags,users,logs]=await Promise.all([
+  const[progress,flags,users,logs,states,lgas,wards]=await Promise.all([
    supabase.from('ea_progress').select('*').order('ea_code'),
    supabase.from('duplicate_flags').select('*').eq('status','open').order('created_at',{ascending:false}),
    supabase.from('profiles').select('user_id,full_name,role,is_active,created_at').order('full_name'),
    supabase.from('audit_log').select('audit_id,table_name,record_id,action,changed_by,changed_at').order('changed_at',{ascending:false}).limit(30),
+    supabase.from('states').select('state_id,name').order('name'),
+    supabase.from('lgas').select('lga_id,state_id,name').order('name'),
+    supabase.from('wards').select('ward_id,lga_id,name').order('name'),
   ]);
-  const failures=[progress.error,flags.error,users.error,logs.error].filter(Boolean);
+  const failures=[progress.error,flags.error,users.error,logs.error,states.error,lgas.error,wards.error].filter(Boolean);
   if(failures.length){
    console.error('Could not load admin dashboard data:',{progress:progress.error,duplicateFlags:flags.error,profiles:users.error,auditLog:logs.error});
    const details=[
@@ -43,7 +53,7 @@ function AdminView(){
     users.error&&`profiles: ${users.error.message}`,
     logs.error&&`audit_log: ${logs.error.message}`,
    ].filter(Boolean).join(' | ');
-   setMsg(`Admin dashboard setup error: ${details} Run the Supabase SQL scripts listed in README.md, then refresh this page.`);
+    setMsg(`Admin dashboard setup error: ${details} Run the Supabase SQL scripts listed in README.md, then refresh this page.`);
   }else{
    setMsg('');
   }
@@ -51,6 +61,7 @@ function AdminView(){
   setDups((flags.data??[]) as DuplicateFlag[]);
   setProfiles((users.data??[]) as Profile[]);
   setAudit((logs.data??[]) as AuditEntry[]);
+  setGeoStates((states.data??[]) as GeoState[]);setGeoLgas((lgas.data??[]) as GeoLga[]);setGeoWards((wards.data??[]) as GeoWard[]);
  }
 
  useEffect(()=>{
@@ -58,6 +69,7 @@ function AdminView(){
   void load();
   const channel=supabase.channel('admin-progress')
    .on('postgres_changes',{event:'*',schema:'public',table:'households'},()=>void load())
+   .on('postgres_changes',{event:'*',schema:'public',table:'population_aggregates'},()=>void load())
    .on('postgres_changes',{event:'*',schema:'public',table:'profiles'},()=>void load())
    .subscribe();
   return()=>{void supabase.removeChannel(channel)};
@@ -78,10 +90,11 @@ function AdminView(){
  }
 
  async function createEA(){
-  if(!eaCode||!state||!lga||!ward){setMsg('EA code, state, LGA and ward are required.');return}
-  const{error}=await supabase.from('enumeration_areas').insert({ea_code:eaCode,state,lga,ward,target_households:+target});
+  const selectedState=geoStates.find(item=>String(item.state_id)===stateId);const selectedLga=geoLgas.find(item=>String(item.lga_id)===lgaId);const selectedWard=geoWards.find(item=>String(item.ward_id)===wardId);
+  if(!eaCode||!selectedState||!selectedLga||!selectedWard){setMsg('EA code, state, LGA and ward are required.');return}
+  const{error}=await supabase.from('enumeration_areas').insert({ea_code:eaCode,state:selectedState.name,lga:selectedLga.name,ward:selectedWard.name,ward_id:selectedWard.ward_id,target_households:+target});
   setMsg(error?.message??'Enumeration area created.');
-  if(!error){setEaCode('');setState('');setLga('');setWard('');void load()}
+  if(!error){setEaCode('');setStateId('');setLgaId('');setWardId('');void load()}
  }
 
  async function assignEA(){
@@ -109,7 +122,7 @@ function AdminView(){
 
  return <main className="admin-page">
   <div className="admin-heading">
-   <div><p className="eyebrow">Operations console</p><h1>Control room</h1><p>Accounts, field areas, progress, reports and audit trace.</p></div>
+   <div><p className="eyebrow">Operations console</p><h1>Control room</h1><p>Accounts, field areas, progress, reports and audit trace.</p><AdminSearch/></div>
    <button className="button button-primary" onClick={download}>Download progress CSV <span>↓</span></button>
   </div>
   {msg&&<p className="admin-message">{msg}</p>}
@@ -129,9 +142,9 @@ function AdminView(){
    <div className="panel-heading"><div><p className="eyebrow">02 / Field management</p><h2>Enumeration areas</h2><a className="text-link" href="https://www.nationalpopulation.gov.ng/EAD?utm_source=chatgpt.com" target="_blank" rel="noreferrer">Open NPC EAD source <span>↗</span></a></div><span>{eas.length} areas</span></div>
    <div className="ea-form">
     <input placeholder="EA code" value={eaCode} onChange={event=>setEaCode(event.target.value)}/>
-    <input placeholder="State" value={state} onChange={event=>setState(event.target.value)}/>
-    <input placeholder="LGA" value={lga} onChange={event=>setLga(event.target.value)}/>
-    <input placeholder="Ward" value={ward} onChange={event=>setWard(event.target.value)}/>
+    <select aria-label="EA state" value={stateId} onChange={event=>{setStateId(event.target.value);setLgaId('');setWardId('')}}><option value="">Select state</option>{geoStates.map(item=><option key={item.state_id} value={item.state_id}>{item.name}</option>)}</select>
+    <select aria-label="EA LGA" value={lgaId} disabled={!stateId} onChange={event=>{setLgaId(event.target.value);setWardId('')}}><option value="">Select LGA</option>{geoLgas.filter(item=>String(item.state_id)===stateId).map(item=><option key={item.lga_id} value={item.lga_id}>{item.name}</option>)}</select>
+    <select aria-label="EA ward" value={wardId} disabled={!lgaId} onChange={event=>setWardId(event.target.value)}><option value="">Select ward</option>{geoWards.filter(item=>String(item.lga_id)===lgaId).map(item=><option key={item.ward_id} value={item.ward_id}>{item.name}</option>)}</select>
     <input type="number" placeholder="Target HH" value={target} onChange={event=>setTarget(event.target.value)}/>
     <button onClick={createEA}>Create EA</button>
    </div>
@@ -159,13 +172,15 @@ function AdminView(){
     <thead><tr><th>Name</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
     <tbody>{profiles.map(profile=><tr key={profile.user_id}>
      <td>{profile.full_name}</td>
-     <td><select value={profile.role} onChange={event=>void updateProfile(profile.user_id,{role:event.target.value})}><option value="citizen">Citizen</option><option value="enumerator">Enumerator</option><option value="supervisor">Supervisor</option><option value="administrator">Administrator</option></select></td>
+     <td><select value={profile.role} onChange={event=>void updateProfile(profile.user_id,{role:event.target.value})}><option value="citizen">Citizen</option><option value="enumerator">Enumerator</option><option value="supervisor">Supervisor</option><option value="analyst">Analyst</option><option value="administrator">Administrator</option></select></td>
      <td>{profile.is_active?'Active':'Pending'}</td>
      <td><button className="table-action" onClick={()=>void updateProfile(profile.user_id,{is_active:!profile.is_active})}>{profile.is_active?'Deactivate':'Activate'}</button></td>
     </tr>)}</tbody>
    </table></div>
   </section>
-  <CitizenSubmissions areas={eas} profiles={profiles}/>
+  <AdminResolutionQueue areas={eas} profiles={profiles}/>
+  <PopulationAggregates/>
+  <SensitiveIndicatorLookup role={profiles.find(profile=>profile.user_id===currentUserId)?.role}/>
   <div className="admin-columns">
    <section className="admin-panel">
     <div className="panel-heading"><div><p className="eyebrow">05 / Data quality</p><h2>Potential duplicates</h2></div><span>{dups.length} open</span></div>
@@ -179,4 +194,4 @@ function AdminView(){
  </main>
 }
 
-export default function Admin(){return <RequireRole allow={['administrator','supervisor']}><AdminView/></RequireRole>}
+export default function Admin(){return <RequireRole allow={['administrator','supervisor','analyst']}><AdminView/></RequireRole>}
