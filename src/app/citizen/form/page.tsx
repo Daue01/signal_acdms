@@ -4,6 +4,7 @@ import {useEffect, useState, type FormEvent} from 'react';
 import Link from 'next/link';
 import {supabase} from '@/lib/supabase';
 import {citizenSubmissionSchema, type CitizenSubmissionInput} from '@/lib/citizenSubmission';
+import {loadLgas,loadStates,loadWards} from '@/lib/geography';
 
 type State={state_id:number;name:string};
 type Lga={lga_id:number;state_id:number;name:string};
@@ -24,15 +25,17 @@ export default function CitizenForm(){
  const[loading,setLoading]=useState(true);const[saving,setSaving]=useState(false);const[error,setError]=useState('');const[result,setResult]=useState<{referenceCode:string;status:string;routingReason:string|null}|null>(null);
 
  useEffect(()=>{void Promise.all([
-  supabase.from('states').select('state_id,name').order('name'),
-  supabase.from('lgas').select('lga_id,state_id,name').order('name'),
-  supabase.from('wards').select('ward_id,lga_id,name').order('name'),
+  loadStates(),
   supabase.from('census_indicator_config').select('key,value').eq('key','income_bands').maybeSingle(),
- ]).then(([stateResult,lgaResult,wardResult,configResult])=>{
-  if(stateResult.error||lgaResult.error||wardResult.error){setError('Could not load the official geography lists. Please try again later.');return}
-  setStates((stateResult.data??[]) as State[]);setLgas((lgaResult.data??[]) as Lga[]);setWards((wardResult.data??[]) as Ward[]);
-   if(!configResult.error&&Array.isArray(configResult.data?.value))setIncomeBands(configResult.data.value.filter((band):band is string=>typeof band==='string'));
+ ]).then(([geography,configResult])=>{
+  setStates(geography.data as State[]);
+  if(geography.error)setError(geography.error);
+  else if(!geography.data.length)setError('No states are loaded. Run supabase/009_refresh_geography.sql after importing enumeration areas.');
+  if(!configResult.error&&Array.isArray(configResult.data?.value))setIncomeBands(configResult.data.value.filter((band):band is string=>typeof band==='string'));
  }).finally(()=>setLoading(false))},[]);
+
+ useEffect(()=>{setLgas([]);setWards([]);setLgaId('');setWardId('');if(!stateId)return;let active=true;void loadLgas(Number(stateId)).then(result=>{if(!active)return;if(result.error)setError(result.error);setLgas(result.data as Lga[])});return()=>{active=false}},[stateId]);
+ useEffect(()=>{setWards([]);setWardId('');if(!lgaId)return;let active=true;void loadWards(Number(lgaId)).then(result=>{if(!active)return;if(result.error)setError(result.error);setWards(result.data as Ward[])});return()=>{active=false}},[lgaId]);
 
  const updatePerson=(index:number,key:keyof Person,value:string|number|undefined)=>setPeople(current=>current.map((person,i)=>i===index?{...person,[key]:value}:person));
  const selectedLgas=lgas.filter(item=>String(item.state_id)===stateId);const selectedWards=wards.filter(item=>String(item.lga_id)===lgaId);

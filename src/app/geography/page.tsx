@@ -2,14 +2,15 @@
 
 import {useEffect, useMemo, useState} from 'react';
 import Link from 'next/link';
-import {supabase} from '@/lib/supabase';
+import {loadLgas,loadStates,loadWards, type GeographyLga as Lga, type GeographyState as State, type GeographyWard as Ward} from '@/lib/geography';
 
-type State={state_id:number;name:string};type Lga={lga_id:number;state_id:number;name:string};type Ward={ward_id:number;lga_id:number;name:string};
 const csvEscape=(value:string)=>`"${value.replace(/"/g,'""')}"`;
 
 export default function GeographyDownloads(){
- const[states,setStates]=useState<State[]>([]);const[lgas,setLgas]=useState<Lga[]>([]);const[wards,setWards]=useState<Ward[]>([]);const[stateId,setStateId]=useState('');const[lgaId,setLgaId]=useState('');const[error,setError]=useState('');const[loading,setLoading]=useState(true);
- useEffect(()=>{void Promise.all([supabase.from('states').select('state_id,name').order('name'),supabase.from('lgas').select('lga_id,state_id,name').order('name'),supabase.from('wards').select('ward_id,lga_id,name').order('name')]).then(([a,b,c])=>{if(a.error||b.error||c.error)setError('Official geography is not available yet.');else{setStates((a.data??[]) as State[]);setLgas((b.data??[]) as Lga[]);setWards((c.data??[]) as Ward[])}}).finally(()=>setLoading(false))},[]);
+ const[states,setStates]=useState<State[]>([]);const[lgas,setLgas]=useState<Lga[]>([]);const[wards,setWards]=useState<Ward[]>([]);const[stateId,setStateId]=useState('');const[lgaId,setLgaId]=useState('');const[error,setError]=useState('');const[loading,setLoading]=useState(true);const[loadingChildren,setLoadingChildren]=useState(false);
+ useEffect(()=>{void loadStates().then(result=>{setStates(result.data as State[]);if(result.error)setError(result.error);else if(!result.data.length)setError('No states are loaded. Run supabase/009_refresh_geography.sql after importing enumeration areas.')}).finally(()=>setLoading(false))},[]);
+ useEffect(()=>{setLgas([]);setWards([]);setLgaId('');if(!stateId)return;let active=true;setLoadingChildren(true);void loadLgas(Number(stateId)).then(result=>{if(!active)return;if(result.error)setError(result.error);setLgas(result.data as Lga[])}).finally(()=>{if(active)setLoadingChildren(false)});return()=>{active=false}},[stateId]);
+ useEffect(()=>{setWards([]);if(!lgaId)return;let active=true;setLoadingChildren(true);void loadWards(Number(lgaId)).then(result=>{if(!active)return;if(result.error)setError(result.error);setWards(result.data as Ward[])}).finally(()=>{if(active)setLoadingChildren(false)});return()=>{active=false}},[lgaId]);
  const selectedState=states.find(item=>String(item.state_id)===stateId);const stateLgas=lgas.filter(item=>String(item.state_id)===stateId);const selectedLga=lgas.find(item=>String(item.lga_id)===lgaId);const visibleLgas=selectedLga?[selectedLga]:stateLgas;const visibleWards=selectedLga?wards.filter(item=>item.lga_id===selectedLga.lga_id):wards.filter(item=>stateLgas.some(lga=>lga.lga_id===item.lga_id));
  const rows=useMemo(()=>visibleWards.map(ward=>({state:selectedState?.name??'',lga:lgas.find(item=>item.lga_id===ward.lga_id)?.name??'',ward:ward.name})),[visibleWards,selectedState,lgas]);
  function downloadCsv(){if(!rows.length)return;const content=['State,LGA,Ward',...rows.map(row=>[row.state,row.lga,row.ward].map(csvEscape).join(','))].join('\n');const url=URL.createObjectURL(new Blob([content],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`acdms-${selectedLga?.name??selectedState?.name??'geography'}.csv`;link.click();URL.revokeObjectURL(url)}

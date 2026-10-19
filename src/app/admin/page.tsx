@@ -7,6 +7,7 @@ import AdminResolutionQueue from './AdminResolutionQueue';
 import AdminSearch from './AdminSearch';
 import PopulationAggregates from './PopulationAggregates';
 import SensitiveIndicatorLookup from './SensitiveIndicatorLookup';
+import {loadLgas,loadStates,loadWards} from '@/lib/geography';
 
 type EA={ea_id:string;ea_code:string;state:string;lga:string;ward:string;enumerator:string|null;target_households:number;registered_households:number;individuals:number;pct:number};
 type Profile={user_id:string;full_name:string;role:string;is_active:boolean;created_at:string};
@@ -35,16 +36,13 @@ function AdminView(){
  const[currentUserId,setCurrentUserId]=useState<string|null>(null);
 
  async function load(){
-  const[progress,flags,users,logs,states,lgas,wards]=await Promise.all([
+  const[progress,flags,users,logs]=await Promise.all([
    supabase.from('ea_progress').select('*').order('ea_code'),
    supabase.from('duplicate_flags').select('*').eq('status','open').order('created_at',{ascending:false}),
    supabase.from('profiles').select('user_id,full_name,role,is_active,created_at').order('full_name'),
    supabase.from('audit_log').select('audit_id,table_name,record_id,action,changed_by,changed_at').order('changed_at',{ascending:false}).limit(30),
-    supabase.from('states').select('state_id,name').order('name'),
-    supabase.from('lgas').select('lga_id,state_id,name').order('name'),
-    supabase.from('wards').select('ward_id,lga_id,name').order('name'),
   ]);
-  const failures=[progress.error,flags.error,users.error,logs.error,states.error,lgas.error,wards.error].filter(Boolean);
+  const failures=[progress.error,flags.error,users.error,logs.error].filter(Boolean);
   if(failures.length){
    console.error('Could not load admin dashboard data:',{progress:progress.error,duplicateFlags:flags.error,profiles:users.error,auditLog:logs.error});
    const details=[
@@ -61,7 +59,6 @@ function AdminView(){
   setDups((flags.data??[]) as DuplicateFlag[]);
   setProfiles((users.data??[]) as Profile[]);
   setAudit((logs.data??[]) as AuditEntry[]);
-  setGeoStates((states.data??[]) as GeoState[]);setGeoLgas((lgas.data??[]) as GeoLga[]);setGeoWards((wards.data??[]) as GeoWard[]);
  }
 
  useEffect(()=>{
@@ -74,6 +71,10 @@ function AdminView(){
    .subscribe();
   return()=>{void supabase.removeChannel(channel)};
  },[]);
+
+ useEffect(()=>{let active=true;void loadStates().then(result=>{if(!active)return;if(result.error)setMsg(result.error);setGeoStates(result.data as GeoState[])});return()=>{active=false}},[]);
+ useEffect(()=>{setGeoLgas([]);setGeoWards([]);if(!stateId)return;let active=true;void loadLgas(Number(stateId)).then(result=>{if(!active)return;if(result.error)setMsg(result.error);setGeoLgas(result.data as GeoLga[])});return()=>{active=false}},[stateId]);
+ useEffect(()=>{setGeoWards([]);if(!lgaId)return;let active=true;void loadWards(Number(lgaId)).then(result=>{if(!active)return;if(result.error)setMsg(result.error);setGeoWards(result.data as GeoWard[])});return()=>{active=false}},[lgaId]);
 
  async function updateProfile(user_id:string,changes:Partial<Profile>){
   const{error}=await supabase.from('profiles').update(changes).eq('user_id',user_id);

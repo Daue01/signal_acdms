@@ -2,16 +2,20 @@
 
 import {useEffect, useState} from 'react';
 import {supabase} from '@/lib/supabase';
+import {loadLgas,loadStates,loadWards} from '@/lib/geography';
 
 type Aggregate={scope:string;aggregate_key:string;approved_households:string;approved_individuals:string;electricity_percentage:string;average_electricity_hours:string;improved_water_percentage:string;car_ownership_rate:string;electricity_level:string;water_level:string};
 type State={state_id:number;name:string};
-type Lga={lga_id:number;name:string};
-type Ward={ward_id:number;name:string};
+type Lga={lga_id:number;state_id:number;name:string};
+type Ward={ward_id:number;lga_id:number;name:string};
 type Ea={ea_id:string;ea_code:string;ward_id:number};
 
 export default function PopulationAggregates(){
  const[scope,setScope]=useState<'state'|'lga'|'ward'|'ea'>('state');const[stateId,setStateId]=useState<number|null>(null);const[lgaId,setLgaId]=useState<number|null>(null);const[wardId,setWardId]=useState<number|null>(null);const[rows,setRows]=useState<Aggregate[]>([]);const[states,setStates]=useState<State[]>([]);const[lgas,setLgas]=useState<Lga[]>([]);const[wards,setWards]=useState<Ward[]>([]);const[eas,setEas]=useState<Ea[]>([]);const[message,setMessage]=useState('');
- useEffect(()=>{void Promise.all([supabase.from('states').select('state_id,name').order('name'),supabase.from('lgas').select('lga_id,name').order('name'),supabase.from('wards').select('ward_id,name').order('name'),supabase.from('enumeration_areas').select('ea_id,ea_code,ward_id').order('ea_code')]).then(([a,b,c,d])=>{setStates((a.data??[]) as State[]);setLgas((b.data??[]) as Lga[]);setWards((c.data??[]) as Ward[]);setEas((d.data??[]) as Ea[])})},[]);
+ useEffect(()=>{void loadStates().then(result=>{setStates(result.data as State[]);if(result.error)setMessage(result.error)})},[]);
+ useEffect(()=>{setLgas([]);if(!stateId)return;let active=true;void loadLgas(stateId).then(result=>{if(active){setLgas(result.data as Lga[]);if(result.error)setMessage(result.error)}});return()=>{active=false}},[stateId]);
+ useEffect(()=>{setWards([]);if(!lgaId)return;let active=true;void loadWards(lgaId).then(result=>{if(active){setWards(result.data as Ward[]);if(result.error)setMessage(result.error)}});return()=>{active=false}},[lgaId]);
+ useEffect(()=>{setEas([]);if(!wardId)return;let active=true;void supabase.from('enumeration_areas').select('ea_id,ea_code,ward_id').eq('ward_id',wardId).order('ea_code').then(result=>{if(active){setEas((result.data??[]) as Ea[]);if(result.error)setMessage(result.error.message)}});return()=>{active=false}},[wardId]);
  useEffect(()=>{let active=true;const args:{p_scope:string;p_state_id?:number;p_lga_id?:number;p_ward_id?:number}={p_scope:scope};if(stateId)args.p_state_id=stateId;if(lgaId)args.p_lga_id=lgaId;if(wardId)args.p_ward_id=wardId;const load=async()=>{const{data,error}=await supabase.rpc('public_population_totals',args);if(!active)return;if(error)setMessage(error.message);else{setMessage('');setRows((data??[]) as Aggregate[])}};void load();const channel=supabase.channel('admin-population-aggregates').on('postgres_changes',{event:'*',schema:'public',table:'population_aggregates'},()=>void load()).subscribe();return()=>{active=false;void supabase.removeChannel(channel)}},[scope,stateId,lgaId,wardId]);
  const nameFor=(row:Aggregate)=>{if(scope==='ea')return eas.find(item=>`ea:${item.ea_id}`===row.aggregate_key)?.ea_code??row.aggregate_key;const id=Number(row.aggregate_key.split(':')[1]);return scope==='state'?states.find(item=>item.state_id===id)?.name??row.aggregate_key:scope==='lga'?lgas.find(item=>item.lga_id===id)?.name??row.aggregate_key:wards.find(item=>item.ward_id===id)?.name??row.aggregate_key};
  function drill(row:Aggregate){if(scope==='state'){setStateId(Number(row.aggregate_key.split(':')[1]));setScope('lga')}else if(scope==='lga'){setLgaId(Number(row.aggregate_key.split(':')[1]));setScope('ward')}else if(scope==='ward'){setWardId(Number(row.aggregate_key.split(':')[1]));setScope('ea')}}
