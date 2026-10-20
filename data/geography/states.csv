@@ -1,0 +1,38 @@
+state_name,iso3166_2_code,geopolitical_zone,is_fct,lga_count,source_id
+Abia,NG-AB,South East,false,17,iso3166_2_ng
+Adamawa,NG-AD,North East,false,21,iso3166_2_ng
+Akwa Ibom,NG-AK,South South,false,31,iso3166_2_ng
+Anambra,NG-AN,South East,false,21,iso3166_2_ng
+Bauchi,NG-BA,North East,false,20,iso3166_2_ng
+Bayelsa,NG-BY,South South,false,8,iso3166_2_ng
+Benue,NG-BE,North Central,false,23,iso3166_2_ng
+Borno,NG-BO,North East,false,27,iso3166_2_ng
+Cross River,NG-CR,South South,false,18,iso3166_2_ng
+Delta,NG-DE,South South,false,25,iso3166_2_ng
+Ebonyi,NG-EB,South East,false,13,iso3166_2_ng
+Edo,NG-ED,South South,false,18,iso3166_2_ng
+Ekiti,NG-EK,South West,false,16,iso3166_2_ng
+Enugu,NG-EN,South East,false,17,iso3166_2_ng
+Federal Capital Territory,NG-FC,North Central,true,6,iso3166_2_ng
+Gombe,NG-GO,North East,false,11,iso3166_2_ng
+Imo,NG-IM,South East,false,27,iso3166_2_ng
+Jigawa,NG-JI,North West,false,27,iso3166_2_ng
+Kaduna,NG-KD,North West,false,23,iso3166_2_ng
+Kano,NG-KN,North West,false,44,iso3166_2_ng
+Katsina,NG-KT,North West,false,34,iso3166_2_ng
+Kebbi,NG-KE,North West,false,21,iso3166_2_ng
+Kogi,NG-KO,North Central,false,21,iso3166_2_ng
+Kwara,NG-KW,North Central,false,16,iso3166_2_ng
+Lagos,NG-LA,South West,false,20,iso3166_2_ng
+Nasarawa,NG-NA,North Central,false,13,iso3166_2_ng
+Niger,NG-NI,North Central,false,25,iso3166_2_ng
+Ogun,NG-OG,South West,false,20,iso3166_2_ng
+Ondo,NG-ON,South West,false,18,iso3166_2_ng
+Osun,NG-OS,South West,false,30,iso3166_2_ng
+Oyo,NG-OY,South West,false,33,iso3166_2_ng
+Plateau,NG-PL,North Central,false,17,iso3166_2_ng
+Rivers,NG-RI,South South,false,23,iso3166_2_ng
+Sokoto,NG-SO,North West,false,23,iso3166_2_ng
+Taraba,NG-TA,North East,false,16,iso3166_2_ng
+Yobe,NG-YO,North East,false,17,iso3166_2_ng
+Zamfara,NG-ZA,North West,false,14,iso3166_2_ng

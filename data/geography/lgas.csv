@@ -1,0 +1,775 @@
+state_name,state_iso3166_2_code,lga_name,kind,official_code,internal_working_code,enumeration_status,name_review_note,source_id
+Abia,NG-AB,Aba North,lga,,NG-AB-001,active,,xosasx_community_2022
+Abia,NG-AB,Aba South,lga,,NG-AB-002,active,,xosasx_community_2022
+Abia,NG-AB,Arochukwu,lga,,NG-AB-003,active,,xosasx_community_2022
+Abia,NG-AB,Bende,lga,,NG-AB-004,active,,xosasx_community_2022
+Abia,NG-AB,Ikwuano,lga,,NG-AB-005,active,,xosasx_community_2022
+Abia,NG-AB,Isiala Ngwa North,lga,,NG-AB-006,active,,xosasx_community_2022
+Abia,NG-AB,Isiala Ngwa South,lga,,NG-AB-007,active,,xosasx_community_2022
+Abia,NG-AB,Isuikwuato,lga,,NG-AB-008,active,NEEDS REVIEW: community file has 'Isuikwuato'; Abia State Government site (abiastate.gov.ng) lists 'Isiukwuato'. Not changed — confirm against OCHA/NPC before finalizing.,xosasx_community_2022
+Abia,NG-AB,Obi Ngwa,lga,,NG-AB-009,active,,xosasx_community_2022
+Abia,NG-AB,Ohafia,lga,,NG-AB-010,active,,xosasx_community_2022
+Abia,NG-AB,Osisioma Ngwa,lga,,NG-AB-011,active,Changed from 'Osisioma' to 'Osisioma Ngwa' per Abia State Government official LGA list (abiastate.gov.ng).,xosasx_community_2022
+Abia,NG-AB,Ugwunagbo,lga,,NG-AB-012,active,,xosasx_community_2022
+Abia,NG-AB,Ukwa East,lga,,NG-AB-013,active,,xosasx_community_2022
+Abia,NG-AB,Ukwa West,lga,,NG-AB-014,active,,xosasx_community_2022
+Abia,NG-AB,Umunneochi,lga,,NG-AB-015,active,"Changed from 'Umu-Nneochi' to 'Umunneochi' (one word, no hyphen) per Abia State Government official LGA list (abiastate.gov.ng).",xosasx_community_2022
+Abia,NG-AB,Umuahia North,lga,,NG-AB-016,active,,xosasx_community_2022
+Abia,NG-AB,Umuahia South,lga,,NG-AB-017,active,,xosasx_community_2022
+Adamawa,NG-AD,Demsa,lga,,NG-AD-001,active,,xosasx_community_2022
+Adamawa,NG-AD,Fufore,lga,,NG-AD-002,active,,xosasx_community_2022
+Adamawa,NG-AD,Ganye,lga,,NG-AD-003,active,,xosasx_community_2022
+Adamawa,NG-AD,Girei,lga,,NG-AD-004,active,,xosasx_community_2022
+Adamawa,NG-AD,Gombi,lga,,NG-AD-005,active,,xosasx_community_2022
+Adamawa,NG-AD,Guyuk,lga,,NG-AD-006,active,,xosasx_community_2022
+Adamawa,NG-AD,Hong,lga,,NG-AD-007,active,,xosasx_community_2022
+Adamawa,NG-AD,Jada,lga,,NG-AD-008,active,,xosasx_community_2022
+Adamawa,NG-AD,Lamurde,lga,,NG-AD-009,active,,xosasx_community_2022
+Adamawa,NG-AD,Madagali,lga,,NG-AD-010,active,,xosasx_community_2022
+Adamawa,NG-AD,Maiha,lga,,NG-AD-011,active,,xosasx_community_2022
+Adamawa,NG-AD,Mayo Belwa,lga,,NG-AD-012,active,,xosasx_community_2022
+Adamawa,NG-AD,Michika,lga,,NG-AD-013,active,,xosasx_community_2022
+Adamawa,NG-AD,Mubi North,lga,,NG-AD-014,active,,xosasx_community_2022
+Adamawa,NG-AD,Mubi South,lga,,NG-AD-015,active,,xosasx_community_2022
+Adamawa,NG-AD,Numan,lga,,NG-AD-016,active,,xosasx_community_2022
+Adamawa,NG-AD,Shelleng,lga,,NG-AD-017,active,,xosasx_community_2022
+Adamawa,NG-AD,Song,lga,,NG-AD-018,active,,xosasx_community_2022
+Adamawa,NG-AD,Toungo,lga,,NG-AD-019,active,,xosasx_community_2022
+Adamawa,NG-AD,Yola North,lga,,NG-AD-020,active,,xosasx_community_2022
+Adamawa,NG-AD,Yola South,lga,,NG-AD-021,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Abak,lga,,NG-AK-001,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Eastern Obolo,lga,,NG-AK-002,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Eket,lga,,NG-AK-003,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Esit Eket,lga,,NG-AK-004,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Essien Udim,lga,,NG-AK-005,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Etim Ekpo,lga,,NG-AK-006,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Etinan,lga,,NG-AK-007,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ibeno,lga,,NG-AK-008,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ibesikpo Asutan,lga,,NG-AK-009,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ibiono Ibom,lga,,NG-AK-010,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ika,lga,,NG-AK-011,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ikono,lga,,NG-AK-012,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ikot Abasi,lga,,NG-AK-013,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ikot Ekpene,lga,,NG-AK-014,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ini,lga,,NG-AK-015,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Itu,lga,,NG-AK-016,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Mbo,lga,,NG-AK-017,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Mkpat Enin,lga,,NG-AK-018,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Nsit Atai,lga,,NG-AK-019,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Nsit Ibom,lga,,NG-AK-020,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Nsit Ubium,lga,,NG-AK-021,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Obot Akara,lga,,NG-AK-022,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Okobo,lga,,NG-AK-023,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Onna,lga,,NG-AK-024,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Oron,lga,,NG-AK-025,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Oruk Anam,lga,,NG-AK-026,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Udung Uko,lga,,NG-AK-027,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Ukanafun,lga,,NG-AK-028,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Uruan,lga,,NG-AK-029,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Urue Offong/Oruko,lga,,NG-AK-030,active,,xosasx_community_2022
+Akwa Ibom,NG-AK,Uyo,lga,,NG-AK-031,active,,xosasx_community_2022
+Anambra,NG-AN,Aguata,lga,,NG-AN-001,active,,xosasx_community_2022
+Anambra,NG-AN,Anambra East,lga,,NG-AN-002,active,,xosasx_community_2022
+Anambra,NG-AN,Anambra West,lga,,NG-AN-003,active,,xosasx_community_2022
+Anambra,NG-AN,Anaocha,lga,,NG-AN-004,active,,xosasx_community_2022
+Anambra,NG-AN,Awka North,lga,,NG-AN-005,active,,xosasx_community_2022
+Anambra,NG-AN,Awka South,lga,,NG-AN-006,active,,xosasx_community_2022
+Anambra,NG-AN,Ayamelum,lga,,NG-AN-007,active,,xosasx_community_2022
+Anambra,NG-AN,Dunukofia,lga,,NG-AN-008,active,,xosasx_community_2022
+Anambra,NG-AN,Ekwusigo,lga,,NG-AN-009,active,,xosasx_community_2022
+Anambra,NG-AN,Idemili North,lga,,NG-AN-010,active,,xosasx_community_2022
+Anambra,NG-AN,Idemili South,lga,,NG-AN-011,active,,xosasx_community_2022
+Anambra,NG-AN,Ihiala,lga,,NG-AN-012,active,,xosasx_community_2022
+Anambra,NG-AN,Njikoka,lga,,NG-AN-013,active,,xosasx_community_2022
+Anambra,NG-AN,Nnewi North,lga,,NG-AN-014,active,,xosasx_community_2022
+Anambra,NG-AN,Nnewi South,lga,,NG-AN-015,active,,xosasx_community_2022
+Anambra,NG-AN,Ogbaru,lga,,NG-AN-016,active,,xosasx_community_2022
+Anambra,NG-AN,Onitsha North,lga,,NG-AN-017,active,,xosasx_community_2022
+Anambra,NG-AN,Onitsha South,lga,,NG-AN-018,active,,xosasx_community_2022
+Anambra,NG-AN,Orumba North,lga,,NG-AN-019,active,,xosasx_community_2022
+Anambra,NG-AN,Orumba South,lga,,NG-AN-020,active,,xosasx_community_2022
+Anambra,NG-AN,Oyi,lga,,NG-AN-021,active,,xosasx_community_2022
+Bauchi,NG-BA,Alkaleri,lga,,NG-BA-001,active,,xosasx_community_2022
+Bauchi,NG-BA,Bauchi,lga,,NG-BA-002,active,,xosasx_community_2022
+Bauchi,NG-BA,Bogoro,lga,,NG-BA-003,active,,xosasx_community_2022
+Bauchi,NG-BA,Damban,lga,,NG-BA-004,active,,xosasx_community_2022
+Bauchi,NG-BA,Darazo,lga,,NG-BA-005,active,,xosasx_community_2022
+Bauchi,NG-BA,Dass,lga,,NG-BA-006,active,,xosasx_community_2022
+Bauchi,NG-BA,Gamawa,lga,,NG-BA-007,active,,xosasx_community_2022
+Bauchi,NG-BA,Ganjuwa,lga,,NG-BA-008,active,,xosasx_community_2022
+Bauchi,NG-BA,Giade,lga,,NG-BA-009,active,,xosasx_community_2022
+Bauchi,NG-BA,Itas/Gadau,lga,,NG-BA-010,active,,xosasx_community_2022
+Bauchi,NG-BA,Jama'are,lga,,NG-BA-011,active,,xosasx_community_2022
+Bauchi,NG-BA,Katagum,lga,,NG-BA-012,active,,xosasx_community_2022
+Bauchi,NG-BA,Kirfi,lga,,NG-BA-013,active,,xosasx_community_2022
+Bauchi,NG-BA,Misau,lga,,NG-BA-014,active,,xosasx_community_2022
+Bauchi,NG-BA,Ningi,lga,,NG-BA-015,active,,xosasx_community_2022
+Bauchi,NG-BA,Shira,lga,,NG-BA-016,active,,xosasx_community_2022
+Bauchi,NG-BA,Tafawa Balewa,lga,,NG-BA-017,active,,xosasx_community_2022
+Bauchi,NG-BA,Toro,lga,,NG-BA-018,active,,xosasx_community_2022
+Bauchi,NG-BA,Warji,lga,,NG-BA-019,active,,xosasx_community_2022
+Bauchi,NG-BA,Zaki,lga,,NG-BA-020,active,,xosasx_community_2022
+Bayelsa,NG-BY,Brass,lga,,NG-BY-001,active,,xosasx_community_2022
+Bayelsa,NG-BY,Ekeremor,lga,,NG-BY-002,active,,xosasx_community_2022
+Bayelsa,NG-BY,Kolokuma/Opokuma,lga,,NG-BY-003,active,,xosasx_community_2022
+Bayelsa,NG-BY,Nembe,lga,,NG-BY-004,active,,xosasx_community_2022
+Bayelsa,NG-BY,Ogbia,lga,,NG-BY-005,active,,xosasx_community_2022
+Bayelsa,NG-BY,Sagbama,lga,,NG-BY-006,active,,xosasx_community_2022
+Bayelsa,NG-BY,Southern Ijaw,lga,,NG-BY-007,active,,xosasx_community_2022
+Bayelsa,NG-BY,Yenagoa,lga,,NG-BY-008,active,,xosasx_community_2022
+Benue,NG-BE,Ado,lga,,NG-BE-001,active,,xosasx_community_2022
+Benue,NG-BE,Agatu,lga,,NG-BE-002,active,,xosasx_community_2022
+Benue,NG-BE,Apa,lga,,NG-BE-003,active,,xosasx_community_2022
+Benue,NG-BE,Buruku,lga,,NG-BE-004,active,,xosasx_community_2022
+Benue,NG-BE,Gboko,lga,,NG-BE-005,active,,xosasx_community_2022
+Benue,NG-BE,Guma,lga,,NG-BE-006,active,,xosasx_community_2022
+Benue,NG-BE,Gwer East,lga,,NG-BE-007,active,,xosasx_community_2022
+Benue,NG-BE,Gwer West,lga,,NG-BE-008,active,,xosasx_community_2022
+Benue,NG-BE,Katsina Ala,lga,,NG-BE-009,active,,xosasx_community_2022
+Benue,NG-BE,Konshisha,lga,,NG-BE-010,active,,xosasx_community_2022
+Benue,NG-BE,Kwande,lga,,NG-BE-011,active,,xosasx_community_2022
+Benue,NG-BE,Logo,lga,,NG-BE-012,active,,xosasx_community_2022
+Benue,NG-BE,Makurdi,lga,,NG-BE-013,active,,xosasx_community_2022
+Benue,NG-BE,Obi,lga,,NG-BE-014,active,,xosasx_community_2022
+Benue,NG-BE,Ogbadibo,lga,,NG-BE-015,active,,xosasx_community_2022
+Benue,NG-BE,Ohimini,lga,,NG-BE-016,active,,xosasx_community_2022
+Benue,NG-BE,Oju,lga,,NG-BE-017,active,,xosasx_community_2022
+Benue,NG-BE,Okpokwu,lga,,NG-BE-018,active,,xosasx_community_2022
+Benue,NG-BE,Otukpo,lga,,NG-BE-019,active,,xosasx_community_2022
+Benue,NG-BE,Tarka,lga,,NG-BE-020,active,,xosasx_community_2022
+Benue,NG-BE,Ukum,lga,,NG-BE-021,active,,xosasx_community_2022
+Benue,NG-BE,Ushongo,lga,,NG-BE-022,active,,xosasx_community_2022
+Benue,NG-BE,Vandeikya,lga,,NG-BE-023,active,,xosasx_community_2022
+Borno,NG-BO,Abadam,lga,,NG-BO-001,active,,xosasx_community_2022
+Borno,NG-BO,Askira/Uba,lga,,NG-BO-002,active,,xosasx_community_2022
+Borno,NG-BO,Bama,lga,,NG-BO-003,active,,xosasx_community_2022
+Borno,NG-BO,Bayo,lga,,NG-BO-004,active,,xosasx_community_2022
+Borno,NG-BO,Biu,lga,,NG-BO-005,active,,xosasx_community_2022
+Borno,NG-BO,Chibok,lga,,NG-BO-006,active,,xosasx_community_2022
+Borno,NG-BO,Damboa,lga,,NG-BO-007,active,,xosasx_community_2022
+Borno,NG-BO,Dikwa,lga,,NG-BO-008,active,,xosasx_community_2022
+Borno,NG-BO,Gubio,lga,,NG-BO-009,active,,xosasx_community_2022
+Borno,NG-BO,Guzamala,lga,,NG-BO-010,active,,xosasx_community_2022
+Borno,NG-BO,Gwoza,lga,,NG-BO-011,active,,xosasx_community_2022
+Borno,NG-BO,Hawul,lga,,NG-BO-012,active,,xosasx_community_2022
+Borno,NG-BO,Jere,lga,,NG-BO-013,active,,xosasx_community_2022
+Borno,NG-BO,Kaga,lga,,NG-BO-014,active,,xosasx_community_2022
+Borno,NG-BO,Kala/Balge,lga,,NG-BO-015,active,,xosasx_community_2022
+Borno,NG-BO,Konduga,lga,,NG-BO-016,active,,xosasx_community_2022
+Borno,NG-BO,Kukawa,lga,,NG-BO-017,active,,xosasx_community_2022
+Borno,NG-BO,Kwaya Kusar,lga,,NG-BO-018,active,,xosasx_community_2022
+Borno,NG-BO,Mafa,lga,,NG-BO-019,active,,xosasx_community_2022
+Borno,NG-BO,Magumeri,lga,,NG-BO-020,active,,xosasx_community_2022
+Borno,NG-BO,Maiduguri,lga,,NG-BO-021,active,,xosasx_community_2022
+Borno,NG-BO,Marte,lga,,NG-BO-022,active,,xosasx_community_2022
+Borno,NG-BO,Mobbar,lga,,NG-BO-023,active,,xosasx_community_2022
+Borno,NG-BO,Monguno,lga,,NG-BO-024,active,,xosasx_community_2022
+Borno,NG-BO,Ngala,lga,,NG-BO-025,active,,xosasx_community_2022
+Borno,NG-BO,Nganzai,lga,,NG-BO-026,active,,xosasx_community_2022
+Borno,NG-BO,Shani,lga,,NG-BO-027,active,,xosasx_community_2022
+Cross River,NG-CR,Abi,lga,,NG-CR-001,active,,xosasx_community_2022
+Cross River,NG-CR,Akamkpa,lga,,NG-CR-002,active,,xosasx_community_2022
+Cross River,NG-CR,Akpabuyo,lga,,NG-CR-003,active,,xosasx_community_2022
+Cross River,NG-CR,Bakassi,lga,,NG-CR-004,historic_do_not_enumerate,Per OCHA COD-AB caveat: Bakassi peninsula is probably uninhabited following the 2008 Nigeria-Cameroon handover; any resident population is counted under Akpabuyo. Row kept for historical/reference completeness but excluded from active enumeration totals.,xosasx_community_2022
+Cross River,NG-CR,Bekwarra,lga,,NG-CR-005,active,,xosasx_community_2022
+Cross River,NG-CR,Biase,lga,,NG-CR-006,active,,xosasx_community_2022
+Cross River,NG-CR,Boki,lga,,NG-CR-007,active,,xosasx_community_2022
+Cross River,NG-CR,Calabar Municipal,lga,,NG-CR-008,active,,xosasx_community_2022
+Cross River,NG-CR,Calabar South,lga,,NG-CR-009,active,,xosasx_community_2022
+Cross River,NG-CR,Etung,lga,,NG-CR-010,active,,xosasx_community_2022
+Cross River,NG-CR,Ikom,lga,,NG-CR-011,active,,xosasx_community_2022
+Cross River,NG-CR,Obanliku,lga,,NG-CR-012,active,,xosasx_community_2022
+Cross River,NG-CR,Obubra,lga,,NG-CR-013,active,,xosasx_community_2022
+Cross River,NG-CR,Obudu,lga,,NG-CR-014,active,,xosasx_community_2022
+Cross River,NG-CR,Odukpani,lga,,NG-CR-015,active,,xosasx_community_2022
+Cross River,NG-CR,Ogoja,lga,,NG-CR-016,active,,xosasx_community_2022
+Cross River,NG-CR,Yakurr,lga,,NG-CR-017,active,,xosasx_community_2022
+Cross River,NG-CR,Yala,lga,,NG-CR-018,active,,xosasx_community_2022
+Delta,NG-DE,Aniocha North,lga,,NG-DE-001,active,,xosasx_community_2022
+Delta,NG-DE,Aniocha South,lga,,NG-DE-002,active,,xosasx_community_2022
+Delta,NG-DE,Bomadi,lga,,NG-DE-003,active,,xosasx_community_2022
+Delta,NG-DE,Burutu,lga,,NG-DE-004,active,,xosasx_community_2022
+Delta,NG-DE,Ethiope East,lga,,NG-DE-005,active,,xosasx_community_2022
+Delta,NG-DE,Ethiope West,lga,,NG-DE-006,active,,xosasx_community_2022
+Delta,NG-DE,Ika North East,lga,,NG-DE-007,active,,xosasx_community_2022
+Delta,NG-DE,Ika South,lga,,NG-DE-008,active,,xosasx_community_2022
+Delta,NG-DE,Isoko North,lga,,NG-DE-009,active,,xosasx_community_2022
+Delta,NG-DE,Isoko South,lga,,NG-DE-010,active,,xosasx_community_2022
+Delta,NG-DE,Ndokwa East,lga,,NG-DE-011,active,,xosasx_community_2022
+Delta,NG-DE,Ndokwa West,lga,,NG-DE-012,active,,xosasx_community_2022
+Delta,NG-DE,Okpe,lga,,NG-DE-013,active,,xosasx_community_2022
+Delta,NG-DE,Oshimili North,lga,,NG-DE-014,active,,xosasx_community_2022
+Delta,NG-DE,Oshimili South,lga,,NG-DE-015,active,,xosasx_community_2022
+Delta,NG-DE,Patani,lga,,NG-DE-016,active,,xosasx_community_2022
+Delta,NG-DE,Sapele,lga,,NG-DE-017,active,,xosasx_community_2022
+Delta,NG-DE,Udu,lga,,NG-DE-018,active,,xosasx_community_2022
+Delta,NG-DE,Ughelli North,lga,,NG-DE-019,active,,xosasx_community_2022
+Delta,NG-DE,Ughelli South,lga,,NG-DE-020,active,,xosasx_community_2022
+Delta,NG-DE,Ukwuani,lga,,NG-DE-021,active,,xosasx_community_2022
+Delta,NG-DE,Uvwie,lga,,NG-DE-022,active,,xosasx_community_2022
+Delta,NG-DE,Warri North,lga,,NG-DE-023,active,,xosasx_community_2022
+Delta,NG-DE,Warri South,lga,,NG-DE-024,active,,xosasx_community_2022
+Delta,NG-DE,Warri South West,lga,,NG-DE-025,active,,xosasx_community_2022
+Ebonyi,NG-EB,Abakaliki,lga,,NG-EB-001,active,,xosasx_community_2022
+Ebonyi,NG-EB,Afikpo North,lga,,NG-EB-002,active,,xosasx_community_2022
+Ebonyi,NG-EB,Afikpo South,lga,,NG-EB-003,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ebonyi,lga,,NG-EB-004,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ezza North,lga,,NG-EB-005,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ezza South,lga,,NG-EB-006,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ikwo,lga,,NG-EB-007,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ishielu,lga,,NG-EB-008,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ivo,lga,,NG-EB-009,active,,xosasx_community_2022
+Ebonyi,NG-EB,Izzi,lga,,NG-EB-010,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ohaozara,lga,,NG-EB-011,active,,xosasx_community_2022
+Ebonyi,NG-EB,Ohaukwu,lga,,NG-EB-012,active,,xosasx_community_2022
+Ebonyi,NG-EB,Onicha,lga,,NG-EB-013,active,,xosasx_community_2022
+Edo,NG-ED,Akoko Edo,lga,,NG-ED-001,active,,xosasx_community_2022
+Edo,NG-ED,Egor,lga,,NG-ED-002,active,,xosasx_community_2022
+Edo,NG-ED,Esan Central,lga,,NG-ED-003,active,,xosasx_community_2022
+Edo,NG-ED,Esan North East,lga,,NG-ED-004,active,,xosasx_community_2022
+Edo,NG-ED,Esan South East,lga,,NG-ED-005,active,,xosasx_community_2022
+Edo,NG-ED,Esan West,lga,,NG-ED-006,active,,xosasx_community_2022
+Edo,NG-ED,Etsako Central,lga,,NG-ED-007,active,,xosasx_community_2022
+Edo,NG-ED,Etsako East,lga,,NG-ED-008,active,,xosasx_community_2022
+Edo,NG-ED,Etsako West,lga,,NG-ED-009,active,,xosasx_community_2022
+Edo,NG-ED,Igueben,lga,,NG-ED-010,active,,xosasx_community_2022
+Edo,NG-ED,Ikpoba Okha,lga,,NG-ED-011,active,,xosasx_community_2022
+Edo,NG-ED,Oredo,lga,,NG-ED-012,active,,xosasx_community_2022
+Edo,NG-ED,Orhionmwon,lga,,NG-ED-013,active,,xosasx_community_2022
+Edo,NG-ED,Ovia North East,lga,,NG-ED-014,active,,xosasx_community_2022
+Edo,NG-ED,Ovia South West,lga,,NG-ED-015,active,,xosasx_community_2022
+Edo,NG-ED,Owan East,lga,,NG-ED-016,active,,xosasx_community_2022
+Edo,NG-ED,Owan West,lga,,NG-ED-017,active,,xosasx_community_2022
+Edo,NG-ED,Uhunmwonde,lga,,NG-ED-018,active,,xosasx_community_2022
+Ekiti,NG-EK,Ado-Ekiti,lga,,NG-EK-001,active,,xosasx_community_2022
+Ekiti,NG-EK,Efon,lga,,NG-EK-002,active,,xosasx_community_2022
+Ekiti,NG-EK,Ekiti East,lga,,NG-EK-003,active,,xosasx_community_2022
+Ekiti,NG-EK,Ekiti South West,lga,,NG-EK-004,active,,xosasx_community_2022
+Ekiti,NG-EK,Ekiti West,lga,,NG-EK-005,active,,xosasx_community_2022
+Ekiti,NG-EK,Emure,lga,,NG-EK-006,active,,xosasx_community_2022
+Ekiti,NG-EK,Gbonyin,lga,,NG-EK-007,active,,xosasx_community_2022
+Ekiti,NG-EK,Ido-Osi,lga,,NG-EK-008,active,,xosasx_community_2022
+Ekiti,NG-EK,Ijero,lga,,NG-EK-009,active,,xosasx_community_2022
+Ekiti,NG-EK,Ikere,lga,,NG-EK-010,active,,xosasx_community_2022
+Ekiti,NG-EK,Ikole,lga,,NG-EK-011,active,,xosasx_community_2022
+Ekiti,NG-EK,Ilejemeje,lga,,NG-EK-012,active,,xosasx_community_2022
+Ekiti,NG-EK,Irepodun/Ifelodun,lga,,NG-EK-013,active,,xosasx_community_2022
+Ekiti,NG-EK,Ise/Orun,lga,,NG-EK-014,active,,xosasx_community_2022
+Ekiti,NG-EK,Moba,lga,,NG-EK-015,active,,xosasx_community_2022
+Ekiti,NG-EK,Oye,lga,,NG-EK-016,active,,xosasx_community_2022
+Enugu,NG-EN,Aninri,lga,,NG-EN-001,active,,xosasx_community_2022
+Enugu,NG-EN,Awgu,lga,,NG-EN-002,active,,xosasx_community_2022
+Enugu,NG-EN,Enugu East,lga,,NG-EN-003,active,,xosasx_community_2022
+Enugu,NG-EN,Enugu North,lga,,NG-EN-004,active,,xosasx_community_2022
+Enugu,NG-EN,Enugu South,lga,,NG-EN-005,active,,xosasx_community_2022
+Enugu,NG-EN,Ezeagu,lga,,NG-EN-006,active,,xosasx_community_2022
+Enugu,NG-EN,Igbo Etiti,lga,,NG-EN-007,active,,xosasx_community_2022
+Enugu,NG-EN,Igbo Eze North,lga,,NG-EN-008,active,,xosasx_community_2022
+Enugu,NG-EN,Igbo Eze South,lga,,NG-EN-009,active,,xosasx_community_2022
+Enugu,NG-EN,Isi-Uzo,lga,,NG-EN-010,active,,xosasx_community_2022
+Enugu,NG-EN,Nkanu East,lga,,NG-EN-011,active,,xosasx_community_2022
+Enugu,NG-EN,Nkanu West,lga,,NG-EN-012,active,,xosasx_community_2022
+Enugu,NG-EN,Nsukka,lga,,NG-EN-013,active,,xosasx_community_2022
+Enugu,NG-EN,Oji-River,lga,,NG-EN-014,active,,xosasx_community_2022
+Enugu,NG-EN,Udenu,lga,,NG-EN-015,active,,xosasx_community_2022
+Enugu,NG-EN,Udi,lga,,NG-EN-016,active,,xosasx_community_2022
+Enugu,NG-EN,Uzo-Uwani,lga,,NG-EN-017,active,,xosasx_community_2022
+Federal Capital Territory,NG-FC,Abaji,area_council,,NG-FC-001,active,,xosasx_community_2022
+Federal Capital Territory,NG-FC,Abuja Municipal,area_council,,NG-FC-002,active,"Changed from 'Abuja' to 'Abuja Municipal' (legal/common name: Abuja Municipal Area Council, AMAC) per FCT Act area-council list; verify exact admin2Name casing against OCHA/OSGOF file once reachable.",xosasx_community_2022
+Federal Capital Territory,NG-FC,Bwari,area_council,,NG-FC-003,active,,xosasx_community_2022
+Federal Capital Territory,NG-FC,Gwagwalada,area_council,,NG-FC-004,active,,xosasx_community_2022
+Federal Capital Territory,NG-FC,Kuje,area_council,,NG-FC-005,active,,xosasx_community_2022
+Federal Capital Territory,NG-FC,Kwali,area_council,,NG-FC-006,active,,xosasx_community_2022
+Gombe,NG-GO,Akko,lga,,NG-GO-001,active,,xosasx_community_2022
+Gombe,NG-GO,Balanga,lga,,NG-GO-002,active,,xosasx_community_2022
+Gombe,NG-GO,Billiri,lga,,NG-GO-003,active,,xosasx_community_2022
+Gombe,NG-GO,Dukku,lga,,NG-GO-004,active,,xosasx_community_2022
+Gombe,NG-GO,Funakaye,lga,,NG-GO-005,active,,xosasx_community_2022
+Gombe,NG-GO,Gombe,lga,,NG-GO-006,active,,xosasx_community_2022
+Gombe,NG-GO,Kaltungo,lga,,NG-GO-007,active,,xosasx_community_2022
+Gombe,NG-GO,Kwami,lga,,NG-GO-008,active,,xosasx_community_2022
+Gombe,NG-GO,Nafada,lga,,NG-GO-009,active,,xosasx_community_2022
+Gombe,NG-GO,Shongom,lga,,NG-GO-010,active,,xosasx_community_2022
+Gombe,NG-GO,Yamaltu/Deba,lga,,NG-GO-011,active,,xosasx_community_2022
+Imo,NG-IM,Aboh Mbaise,lga,,NG-IM-001,active,,xosasx_community_2022
+Imo,NG-IM,Ahiazu Mbaise,lga,,NG-IM-002,active,,xosasx_community_2022
+Imo,NG-IM,Ehime Mbano,lga,,NG-IM-003,active,,xosasx_community_2022
+Imo,NG-IM,Ezinihitte Mbaise,lga,,NG-IM-004,active,,xosasx_community_2022
+Imo,NG-IM,Ideato North,lga,,NG-IM-005,active,,xosasx_community_2022
+Imo,NG-IM,Ideato South,lga,,NG-IM-006,active,,xosasx_community_2022
+Imo,NG-IM,Ihitte/Uboma,lga,,NG-IM-007,active,,xosasx_community_2022
+Imo,NG-IM,Ikeduru,lga,,NG-IM-008,active,,xosasx_community_2022
+Imo,NG-IM,Isiala Mbano,lga,,NG-IM-009,active,,xosasx_community_2022
+Imo,NG-IM,Isu,lga,,NG-IM-010,active,,xosasx_community_2022
+Imo,NG-IM,Mbaitoli,lga,,NG-IM-011,active,,xosasx_community_2022
+Imo,NG-IM,Ngor Okpala,lga,,NG-IM-012,active,,xosasx_community_2022
+Imo,NG-IM,Njaba,lga,,NG-IM-013,active,,xosasx_community_2022
+Imo,NG-IM,Nkwerre,lga,,NG-IM-014,active,,xosasx_community_2022
+Imo,NG-IM,Nwangele,lga,,NG-IM-015,active,,xosasx_community_2022
+Imo,NG-IM,Obowo,lga,,NG-IM-016,active,,xosasx_community_2022
+Imo,NG-IM,Oguta,lga,,NG-IM-017,active,,xosasx_community_2022
+Imo,NG-IM,Ohaji/Egbema,lga,,NG-IM-018,active,,xosasx_community_2022
+Imo,NG-IM,Okigwe,lga,,NG-IM-019,active,,xosasx_community_2022
+Imo,NG-IM,Onuimo,lga,,NG-IM-020,active,,xosasx_community_2022
+Imo,NG-IM,Orlu,lga,,NG-IM-021,active,,xosasx_community_2022
+Imo,NG-IM,Orsu,lga,,NG-IM-022,active,,xosasx_community_2022
+Imo,NG-IM,Oru East,lga,,NG-IM-023,active,,xosasx_community_2022
+Imo,NG-IM,Oru West,lga,,NG-IM-024,active,,xosasx_community_2022
+Imo,NG-IM,Owerri Municipal,lga,,NG-IM-025,active,,xosasx_community_2022
+Imo,NG-IM,Owerri North,lga,,NG-IM-026,active,,xosasx_community_2022
+Imo,NG-IM,Owerri West,lga,,NG-IM-027,active,,xosasx_community_2022
+Jigawa,NG-JI,Auyo,lga,,NG-JI-001,active,,xosasx_community_2022
+Jigawa,NG-JI,Babura,lga,,NG-JI-002,active,,xosasx_community_2022
+Jigawa,NG-JI,Biriniwa,lga,,NG-JI-003,active,,xosasx_community_2022
+Jigawa,NG-JI,Birnin Kudu,lga,,NG-JI-004,active,,xosasx_community_2022
+Jigawa,NG-JI,Buji,lga,,NG-JI-005,active,,xosasx_community_2022
+Jigawa,NG-JI,Dutse,lga,,NG-JI-006,active,,xosasx_community_2022
+Jigawa,NG-JI,Gagarawa,lga,,NG-JI-007,active,,xosasx_community_2022
+Jigawa,NG-JI,Garki,lga,,NG-JI-008,active,,xosasx_community_2022
+Jigawa,NG-JI,Gumel,lga,,NG-JI-009,active,,xosasx_community_2022
+Jigawa,NG-JI,Guri,lga,,NG-JI-010,active,,xosasx_community_2022
+Jigawa,NG-JI,Gwaram,lga,,NG-JI-011,active,,xosasx_community_2022
+Jigawa,NG-JI,Gwiwa,lga,,NG-JI-012,active,,xosasx_community_2022
+Jigawa,NG-JI,Hadejia,lga,,NG-JI-013,active,,xosasx_community_2022
+Jigawa,NG-JI,Jahun,lga,,NG-JI-014,active,,xosasx_community_2022
+Jigawa,NG-JI,Kafin Hausa,lga,,NG-JI-015,active,,xosasx_community_2022
+Jigawa,NG-JI,Kaugama,lga,,NG-JI-016,active,,xosasx_community_2022
+Jigawa,NG-JI,Kazaure,lga,,NG-JI-017,active,,xosasx_community_2022
+Jigawa,NG-JI,Kiri Kasama,lga,,NG-JI-018,active,,xosasx_community_2022
+Jigawa,NG-JI,Kiyawa,lga,,NG-JI-019,active,,xosasx_community_2022
+Jigawa,NG-JI,Maigatari,lga,,NG-JI-020,active,,xosasx_community_2022
+Jigawa,NG-JI,Malam Madori,lga,,NG-JI-021,active,,xosasx_community_2022
+Jigawa,NG-JI,Miga,lga,,NG-JI-022,active,,xosasx_community_2022
+Jigawa,NG-JI,Ringim,lga,,NG-JI-023,active,,xosasx_community_2022
+Jigawa,NG-JI,Roni,lga,,NG-JI-024,active,,xosasx_community_2022
+Jigawa,NG-JI,Sule Tankarkar,lga,,NG-JI-025,active,,xosasx_community_2022
+Jigawa,NG-JI,Taura,lga,,NG-JI-026,active,,xosasx_community_2022
+Jigawa,NG-JI,Yankwashi,lga,,NG-JI-027,active,,xosasx_community_2022
+Kaduna,NG-KD,Birnin Gwari,lga,,NG-KD-001,active,,xosasx_community_2022
+Kaduna,NG-KD,Chikun,lga,,NG-KD-002,active,,xosasx_community_2022
+Kaduna,NG-KD,Giwa,lga,,NG-KD-003,active,,xosasx_community_2022
+Kaduna,NG-KD,Igabi,lga,,NG-KD-004,active,,xosasx_community_2022
+Kaduna,NG-KD,Ikara,lga,,NG-KD-005,active,,xosasx_community_2022
+Kaduna,NG-KD,Jaba,lga,,NG-KD-006,active,,xosasx_community_2022
+Kaduna,NG-KD,Jema'a,lga,,NG-KD-007,active,,xosasx_community_2022
+Kaduna,NG-KD,Kachia,lga,,NG-KD-008,active,,xosasx_community_2022
+Kaduna,NG-KD,Kaduna North,lga,,NG-KD-009,active,,xosasx_community_2022
+Kaduna,NG-KD,Kaduna South,lga,,NG-KD-010,active,,xosasx_community_2022
+Kaduna,NG-KD,Kagarko,lga,,NG-KD-011,active,,xosasx_community_2022
+Kaduna,NG-KD,Kajuru,lga,,NG-KD-012,active,,xosasx_community_2022
+Kaduna,NG-KD,Kaura,lga,,NG-KD-013,active,,xosasx_community_2022
+Kaduna,NG-KD,Kauru,lga,,NG-KD-014,active,,xosasx_community_2022
+Kaduna,NG-KD,Kubau,lga,,NG-KD-015,active,,xosasx_community_2022
+Kaduna,NG-KD,Kudan,lga,,NG-KD-016,active,,xosasx_community_2022
+Kaduna,NG-KD,Lere,lga,,NG-KD-017,active,,xosasx_community_2022
+Kaduna,NG-KD,Makarfi,lga,,NG-KD-018,active,,xosasx_community_2022
+Kaduna,NG-KD,Sabon Gari,lga,,NG-KD-019,active,,xosasx_community_2022
+Kaduna,NG-KD,Sanga,lga,,NG-KD-020,active,,xosasx_community_2022
+Kaduna,NG-KD,Soba,lga,,NG-KD-021,active,,xosasx_community_2022
+Kaduna,NG-KD,Zangon Kataf,lga,,NG-KD-022,active,,xosasx_community_2022
+Kaduna,NG-KD,Zaria,lga,,NG-KD-023,active,,xosasx_community_2022
+Kano,NG-KN,Ajingi,lga,,NG-KN-001,active,,xosasx_community_2022
+Kano,NG-KN,Albasu,lga,,NG-KN-002,active,,xosasx_community_2022
+Kano,NG-KN,Bagwai,lga,,NG-KN-003,active,,xosasx_community_2022
+Kano,NG-KN,Bebeji,lga,,NG-KN-004,active,,xosasx_community_2022
+Kano,NG-KN,Bichi,lga,,NG-KN-005,active,,xosasx_community_2022
+Kano,NG-KN,Bunkure,lga,,NG-KN-006,active,,xosasx_community_2022
+Kano,NG-KN,Dala,lga,,NG-KN-007,active,,xosasx_community_2022
+Kano,NG-KN,Dambatta,lga,,NG-KN-008,active,,xosasx_community_2022
+Kano,NG-KN,Dawakin Kudu,lga,,NG-KN-009,active,,xosasx_community_2022
+Kano,NG-KN,Dawakin Tofa,lga,,NG-KN-010,active,,xosasx_community_2022
+Kano,NG-KN,Doguwa,lga,,NG-KN-011,active,,xosasx_community_2022
+Kano,NG-KN,Fagge,lga,,NG-KN-012,active,,xosasx_community_2022
+Kano,NG-KN,Gabasawa,lga,,NG-KN-013,active,,xosasx_community_2022
+Kano,NG-KN,Garko,lga,,NG-KN-014,active,,xosasx_community_2022
+Kano,NG-KN,Garun Malam,lga,,NG-KN-015,active,,xosasx_community_2022
+Kano,NG-KN,Gaya,lga,,NG-KN-016,active,,xosasx_community_2022
+Kano,NG-KN,Gezawa,lga,,NG-KN-017,active,,xosasx_community_2022
+Kano,NG-KN,Gwale,lga,,NG-KN-018,active,,xosasx_community_2022
+Kano,NG-KN,Gwarzo,lga,,NG-KN-019,active,,xosasx_community_2022
+Kano,NG-KN,Kabo,lga,,NG-KN-020,active,,xosasx_community_2022
+Kano,NG-KN,Kano Municipal,lga,,NG-KN-021,active,,xosasx_community_2022
+Kano,NG-KN,Karaye,lga,,NG-KN-022,active,,xosasx_community_2022
+Kano,NG-KN,Kibiya,lga,,NG-KN-023,active,,xosasx_community_2022
+Kano,NG-KN,Kiru,lga,,NG-KN-024,active,,xosasx_community_2022
+Kano,NG-KN,Kunchi,lga,,NG-KN-025,active,,xosasx_community_2022
+Kano,NG-KN,Kura,lga,,NG-KN-026,active,,xosasx_community_2022
+Kano,NG-KN,Madobi,lga,,NG-KN-027,active,,xosasx_community_2022
+Kano,NG-KN,Makoda,lga,,NG-KN-028,active,,xosasx_community_2022
+Kano,NG-KN,Minjibir,lga,,NG-KN-029,active,,xosasx_community_2022
+Kano,NG-KN,Nasarawa,lga,,NG-KN-030,active,,xosasx_community_2022
+Kano,NG-KN,Rano,lga,,NG-KN-031,active,,xosasx_community_2022
+Kano,NG-KN,Rimin Gado,lga,,NG-KN-032,active,,xosasx_community_2022
+Kano,NG-KN,Rogo,lga,,NG-KN-033,active,,xosasx_community_2022
+Kano,NG-KN,Shanono,lga,,NG-KN-034,active,,xosasx_community_2022
+Kano,NG-KN,Sumaila,lga,,NG-KN-035,active,,xosasx_community_2022
+Kano,NG-KN,Takai,lga,,NG-KN-036,active,,xosasx_community_2022
+Kano,NG-KN,Tarauni,lga,,NG-KN-037,active,,xosasx_community_2022
+Kano,NG-KN,Tofa,lga,,NG-KN-038,active,,xosasx_community_2022
+Kano,NG-KN,Tsanyawa,lga,,NG-KN-039,active,,xosasx_community_2022
+Kano,NG-KN,Tudun Wada,lga,,NG-KN-040,active,,xosasx_community_2022
+Kano,NG-KN,Ungogo,lga,,NG-KN-041,active,,xosasx_community_2022
+Kano,NG-KN,Warawa,lga,,NG-KN-042,active,,xosasx_community_2022
+Kano,NG-KN,Wudil,lga,,NG-KN-043,active,,xosasx_community_2022
+Kano,NG-KN,kumbotso,lga,,NG-KN-044,active,,xosasx_community_2022
+Katsina,NG-KT,Bakori,lga,,NG-KT-001,active,,xosasx_community_2022
+Katsina,NG-KT,Batagarawa,lga,,NG-KT-002,active,,xosasx_community_2022
+Katsina,NG-KT,Batsari,lga,,NG-KT-003,active,,xosasx_community_2022
+Katsina,NG-KT,Baure,lga,,NG-KT-004,active,,xosasx_community_2022
+Katsina,NG-KT,Bindawa,lga,,NG-KT-005,active,,xosasx_community_2022
+Katsina,NG-KT,Charanchi,lga,,NG-KT-006,active,,xosasx_community_2022
+Katsina,NG-KT,Dan Musa,lga,,NG-KT-007,active,,xosasx_community_2022
+Katsina,NG-KT,DanDume,lga,,NG-KT-008,active,,xosasx_community_2022
+Katsina,NG-KT,Danja,lga,,NG-KT-009,active,,xosasx_community_2022
+Katsina,NG-KT,Daura,lga,,NG-KT-010,active,,xosasx_community_2022
+Katsina,NG-KT,Dutsi,lga,,NG-KT-011,active,,xosasx_community_2022
+Katsina,NG-KT,Dutsin-Ma,lga,,NG-KT-012,active,,xosasx_community_2022
+Katsina,NG-KT,Faskari,lga,,NG-KT-013,active,,xosasx_community_2022
+Katsina,NG-KT,Funtua,lga,,NG-KT-014,active,,xosasx_community_2022
+Katsina,NG-KT,Ingawa,lga,,NG-KT-015,active,,xosasx_community_2022
+Katsina,NG-KT,Jibia,lga,,NG-KT-016,active,,xosasx_community_2022
+Katsina,NG-KT,Kafur,lga,,NG-KT-017,active,,xosasx_community_2022
+Katsina,NG-KT,Kaita,lga,,NG-KT-018,active,,xosasx_community_2022
+Katsina,NG-KT,Kankara,lga,,NG-KT-019,active,,xosasx_community_2022
+Katsina,NG-KT,Kankia,lga,,NG-KT-020,active,,xosasx_community_2022
+Katsina,NG-KT,Katsina,lga,,NG-KT-021,active,,xosasx_community_2022
+Katsina,NG-KT,Kurfi,lga,,NG-KT-022,active,,xosasx_community_2022
+Katsina,NG-KT,Kusada,lga,,NG-KT-023,active,,xosasx_community_2022
+Katsina,NG-KT,Mai'Adua,lga,,NG-KT-024,active,,xosasx_community_2022
+Katsina,NG-KT,Malumfashi,lga,,NG-KT-025,active,,xosasx_community_2022
+Katsina,NG-KT,Mani,lga,,NG-KT-026,active,,xosasx_community_2022
+Katsina,NG-KT,Mashi,lga,,NG-KT-027,active,,xosasx_community_2022
+Katsina,NG-KT,Matazu,lga,,NG-KT-028,active,,xosasx_community_2022
+Katsina,NG-KT,Musawa,lga,,NG-KT-029,active,,xosasx_community_2022
+Katsina,NG-KT,Rimi,lga,,NG-KT-030,active,,xosasx_community_2022
+Katsina,NG-KT,Sabuwa,lga,,NG-KT-031,active,,xosasx_community_2022
+Katsina,NG-KT,Safana,lga,,NG-KT-032,active,,xosasx_community_2022
+Katsina,NG-KT,Sandamu,lga,,NG-KT-033,active,,xosasx_community_2022
+Katsina,NG-KT,Zango,lga,,NG-KT-034,active,,xosasx_community_2022
+Kebbi,NG-KE,Aliero,lga,,NG-KE-001,active,,xosasx_community_2022
+Kebbi,NG-KE,Arewa Dandi,lga,,NG-KE-002,active,,xosasx_community_2022
+Kebbi,NG-KE,Argungu,lga,,NG-KE-003,active,,xosasx_community_2022
+Kebbi,NG-KE,Augie,lga,,NG-KE-004,active,,xosasx_community_2022
+Kebbi,NG-KE,Bagudo,lga,,NG-KE-005,active,,xosasx_community_2022
+Kebbi,NG-KE,Birnin Kebbi,lga,,NG-KE-006,active,,xosasx_community_2022
+Kebbi,NG-KE,Bunza,lga,,NG-KE-007,active,,xosasx_community_2022
+Kebbi,NG-KE,Dandi,lga,,NG-KE-008,active,,xosasx_community_2022
+Kebbi,NG-KE,Danko-Wasagu,lga,,NG-KE-009,active,,xosasx_community_2022
+Kebbi,NG-KE,Fakai,lga,,NG-KE-010,active,,xosasx_community_2022
+Kebbi,NG-KE,Gwandu,lga,,NG-KE-011,active,,xosasx_community_2022
+Kebbi,NG-KE,Jega,lga,,NG-KE-012,active,,xosasx_community_2022
+Kebbi,NG-KE,Kalgo,lga,,NG-KE-013,active,,xosasx_community_2022
+Kebbi,NG-KE,Koko/Besse,lga,,NG-KE-014,active,,xosasx_community_2022
+Kebbi,NG-KE,Maiyama,lga,,NG-KE-015,active,,xosasx_community_2022
+Kebbi,NG-KE,Ngaski,lga,,NG-KE-016,active,,xosasx_community_2022
+Kebbi,NG-KE,Sakaba,lga,,NG-KE-017,active,,xosasx_community_2022
+Kebbi,NG-KE,Shanga,lga,,NG-KE-018,active,,xosasx_community_2022
+Kebbi,NG-KE,Suru,lga,,NG-KE-019,active,,xosasx_community_2022
+Kebbi,NG-KE,Yauri,lga,,NG-KE-020,active,,xosasx_community_2022
+Kebbi,NG-KE,Zuru,lga,,NG-KE-021,active,,xosasx_community_2022
+Kogi,NG-KO,Adavi,lga,,NG-KO-001,active,,xosasx_community_2022
+Kogi,NG-KO,Ajaokuta,lga,,NG-KO-002,active,,xosasx_community_2022
+Kogi,NG-KO,Ankpa,lga,,NG-KO-003,active,,xosasx_community_2022
+Kogi,NG-KO,Bassa,lga,,NG-KO-004,active,,xosasx_community_2022
+Kogi,NG-KO,Dekina,lga,,NG-KO-005,active,,xosasx_community_2022
+Kogi,NG-KO,Ibaji,lga,,NG-KO-006,active,,xosasx_community_2022
+Kogi,NG-KO,Idah,lga,,NG-KO-007,active,,xosasx_community_2022
+Kogi,NG-KO,Igalamela Odolu,lga,,NG-KO-008,active,,xosasx_community_2022
+Kogi,NG-KO,Ijumu,lga,,NG-KO-009,active,,xosasx_community_2022
+Kogi,NG-KO,Kabba/Bunu,lga,,NG-KO-010,active,,xosasx_community_2022
+Kogi,NG-KO,Kogi,lga,,NG-KO-011,active,,xosasx_community_2022
+Kogi,NG-KO,Lokoja,lga,,NG-KO-012,active,,xosasx_community_2022
+Kogi,NG-KO,Mopa-Muro,lga,,NG-KO-013,active,,xosasx_community_2022
+Kogi,NG-KO,Ofu,lga,,NG-KO-014,active,,xosasx_community_2022
+Kogi,NG-KO,Ogori/Magongo,lga,,NG-KO-015,active,,xosasx_community_2022
+Kogi,NG-KO,Okehi,lga,,NG-KO-016,active,,xosasx_community_2022
+Kogi,NG-KO,Okene,lga,,NG-KO-017,active,,xosasx_community_2022
+Kogi,NG-KO,Olamaboro,lga,,NG-KO-018,active,,xosasx_community_2022
+Kogi,NG-KO,Omala,lga,,NG-KO-019,active,,xosasx_community_2022
+Kogi,NG-KO,Yagba East,lga,,NG-KO-020,active,,xosasx_community_2022
+Kogi,NG-KO,Yagba West,lga,,NG-KO-021,active,,xosasx_community_2022
+Kwara,NG-KW,Asa,lga,,NG-KW-001,active,,xosasx_community_2022
+Kwara,NG-KW,Baruten,lga,,NG-KW-002,active,,xosasx_community_2022
+Kwara,NG-KW,Edu,lga,,NG-KW-003,active,,xosasx_community_2022
+Kwara,NG-KW,Ekiti,lga,,NG-KW-004,active,,xosasx_community_2022
+Kwara,NG-KW,Ifelodun,lga,,NG-KW-005,active,,xosasx_community_2022
+Kwara,NG-KW,Ilorin East,lga,,NG-KW-006,active,,xosasx_community_2022
+Kwara,NG-KW,Ilorin South,lga,,NG-KW-007,active,,xosasx_community_2022
+Kwara,NG-KW,Ilorin West,lga,,NG-KW-008,active,,xosasx_community_2022
+Kwara,NG-KW,Irepodun,lga,,NG-KW-009,active,,xosasx_community_2022
+Kwara,NG-KW,Isin,lga,,NG-KW-010,active,,xosasx_community_2022
+Kwara,NG-KW,Kaiama,lga,,NG-KW-011,active,,xosasx_community_2022
+Kwara,NG-KW,Moro,lga,,NG-KW-012,active,,xosasx_community_2022
+Kwara,NG-KW,Offa,lga,,NG-KW-013,active,,xosasx_community_2022
+Kwara,NG-KW,Oke-Ero,lga,,NG-KW-014,active,,xosasx_community_2022
+Kwara,NG-KW,Oyun,lga,,NG-KW-015,active,,xosasx_community_2022
+Kwara,NG-KW,Pategi,lga,,NG-KW-016,active,,xosasx_community_2022
+Lagos,NG-LA,Agege,lga,,NG-LA-001,active,,xosasx_community_2022
+Lagos,NG-LA,Ajeromi-Ifelodun,lga,,NG-LA-002,active,,xosasx_community_2022
+Lagos,NG-LA,Alimosho,lga,,NG-LA-003,active,,xosasx_community_2022
+Lagos,NG-LA,Amuwo-Odofin,lga,,NG-LA-004,active,,xosasx_community_2022
+Lagos,NG-LA,Apapa,lga,,NG-LA-005,active,,xosasx_community_2022
+Lagos,NG-LA,Badagry,lga,,NG-LA-006,active,,xosasx_community_2022
+Lagos,NG-LA,Epe,lga,,NG-LA-007,active,,xosasx_community_2022
+Lagos,NG-LA,Eti-Osa,lga,,NG-LA-008,active,,xosasx_community_2022
+Lagos,NG-LA,Ibeju-Lekki,lga,,NG-LA-009,active,,xosasx_community_2022
+Lagos,NG-LA,Ifako-Ijaiye,lga,,NG-LA-010,active,,xosasx_community_2022
+Lagos,NG-LA,Ikeja,lga,,NG-LA-011,active,,xosasx_community_2022
+Lagos,NG-LA,Ikorodu,lga,,NG-LA-012,active,,xosasx_community_2022
+Lagos,NG-LA,Kosofe,lga,,NG-LA-013,active,,xosasx_community_2022
+Lagos,NG-LA,Lagos Island,lga,,NG-LA-014,active,,xosasx_community_2022
+Lagos,NG-LA,Lagos Mainland,lga,,NG-LA-015,active,,xosasx_community_2022
+Lagos,NG-LA,Mushin,lga,,NG-LA-016,active,,xosasx_community_2022
+Lagos,NG-LA,Ojo,lga,,NG-LA-017,active,,xosasx_community_2022
+Lagos,NG-LA,Oshodi-Isolo,lga,,NG-LA-018,active,,xosasx_community_2022
+Lagos,NG-LA,Somolu,lga,,NG-LA-019,active,,xosasx_community_2022
+Lagos,NG-LA,Surulere,lga,,NG-LA-020,active,,xosasx_community_2022
+Nasarawa,NG-NA,Akwanga,lga,,NG-NA-001,active,,xosasx_community_2022
+Nasarawa,NG-NA,Awe,lga,,NG-NA-002,active,,xosasx_community_2022
+Nasarawa,NG-NA,Doma,lga,,NG-NA-003,active,,xosasx_community_2022
+Nasarawa,NG-NA,Karu,lga,,NG-NA-004,active,,xosasx_community_2022
+Nasarawa,NG-NA,Keana,lga,,NG-NA-005,active,,xosasx_community_2022
+Nasarawa,NG-NA,Keffi,lga,,NG-NA-006,active,,xosasx_community_2022
+Nasarawa,NG-NA,Kokona,lga,,NG-NA-007,active,,xosasx_community_2022
+Nasarawa,NG-NA,Lafia,lga,,NG-NA-008,active,,xosasx_community_2022
+Nasarawa,NG-NA,Nasarawa,lga,,NG-NA-009,active,,xosasx_community_2022
+Nasarawa,NG-NA,Nasarawa Egon,lga,,NG-NA-010,active,,xosasx_community_2022
+Nasarawa,NG-NA,Obi,lga,,NG-NA-011,active,,xosasx_community_2022
+Nasarawa,NG-NA,Toto,lga,,NG-NA-012,active,,xosasx_community_2022
+Nasarawa,NG-NA,Wamba,lga,,NG-NA-013,active,,xosasx_community_2022
+Niger,NG-NI,Agaie,lga,,NG-NI-001,active,,xosasx_community_2022
+Niger,NG-NI,Agwara,lga,,NG-NI-002,active,,xosasx_community_2022
+Niger,NG-NI,Bida,lga,,NG-NI-003,active,,xosasx_community_2022
+Niger,NG-NI,Borgu,lga,,NG-NI-004,active,,xosasx_community_2022
+Niger,NG-NI,Bosso,lga,,NG-NI-005,active,,xosasx_community_2022
+Niger,NG-NI,Chanchaga,lga,,NG-NI-006,active,,xosasx_community_2022
+Niger,NG-NI,Edati,lga,,NG-NI-007,active,,xosasx_community_2022
+Niger,NG-NI,Gbako,lga,,NG-NI-008,active,,xosasx_community_2022
+Niger,NG-NI,Gurara,lga,,NG-NI-009,active,,xosasx_community_2022
+Niger,NG-NI,Katcha,lga,,NG-NI-010,active,,xosasx_community_2022
+Niger,NG-NI,Kontagora,lga,,NG-NI-011,active,,xosasx_community_2022
+Niger,NG-NI,Lapai,lga,,NG-NI-012,active,,xosasx_community_2022
+Niger,NG-NI,Lavun,lga,,NG-NI-013,active,,xosasx_community_2022
+Niger,NG-NI,Magama,lga,,NG-NI-014,active,,xosasx_community_2022
+Niger,NG-NI,Mariga,lga,,NG-NI-015,active,,xosasx_community_2022
+Niger,NG-NI,Mashegu,lga,,NG-NI-016,active,,xosasx_community_2022
+Niger,NG-NI,Mokwa,lga,,NG-NI-017,active,,xosasx_community_2022
+Niger,NG-NI,Munya,lga,,NG-NI-018,active,,xosasx_community_2022
+Niger,NG-NI,Paikoro,lga,,NG-NI-019,active,,xosasx_community_2022
+Niger,NG-NI,Rafi,lga,,NG-NI-020,active,,xosasx_community_2022
+Niger,NG-NI,Rijau,lga,,NG-NI-021,active,,xosasx_community_2022
+Niger,NG-NI,Shiroro,lga,,NG-NI-022,active,,xosasx_community_2022
+Niger,NG-NI,Suleja,lga,,NG-NI-023,active,,xosasx_community_2022
+Niger,NG-NI,Tafa,lga,,NG-NI-024,active,,xosasx_community_2022
+Niger,NG-NI,Wushishi,lga,,NG-NI-025,active,,xosasx_community_2022
+Ogun,NG-OG,Abeokuta North,lga,,NG-OG-001,active,,xosasx_community_2022
+Ogun,NG-OG,Abeokuta South,lga,,NG-OG-002,active,,xosasx_community_2022
+Ogun,NG-OG,Ado-Odo/Ota,lga,,NG-OG-003,active,,xosasx_community_2022
+Ogun,NG-OG,Ewekoro,lga,,NG-OG-004,active,,xosasx_community_2022
+Ogun,NG-OG,Ifo,lga,,NG-OG-005,active,,xosasx_community_2022
+Ogun,NG-OG,Ijebu East,lga,,NG-OG-006,active,,xosasx_community_2022
+Ogun,NG-OG,Ijebu North,lga,,NG-OG-007,active,,xosasx_community_2022
+Ogun,NG-OG,Ijebu North East,lga,,NG-OG-008,active,,xosasx_community_2022
+Ogun,NG-OG,Ijebu Ode,lga,,NG-OG-009,active,,xosasx_community_2022
+Ogun,NG-OG,Ikenne,lga,,NG-OG-010,active,,xosasx_community_2022
+Ogun,NG-OG,Imeko Afon,lga,,NG-OG-011,active,,xosasx_community_2022
+Ogun,NG-OG,Ipokia,lga,,NG-OG-012,active,,xosasx_community_2022
+Ogun,NG-OG,Obafemi Owode,lga,,NG-OG-013,active,,xosasx_community_2022
+Ogun,NG-OG,Odeda,lga,,NG-OG-014,active,,xosasx_community_2022
+Ogun,NG-OG,Odogbolu,lga,,NG-OG-015,active,,xosasx_community_2022
+Ogun,NG-OG,Ogun Waterside,lga,,NG-OG-016,active,,xosasx_community_2022
+Ogun,NG-OG,Remo North,lga,,NG-OG-017,active,,xosasx_community_2022
+Ogun,NG-OG,Shagamu,lga,,NG-OG-018,active,,xosasx_community_2022
+Ogun,NG-OG,Yewa North,lga,,NG-OG-019,active,,xosasx_community_2022
+Ogun,NG-OG,Yewa South,lga,,NG-OG-020,active,,xosasx_community_2022
+Ondo,NG-ON,Akoko North East,lga,,NG-ON-001,active,,xosasx_community_2022
+Ondo,NG-ON,Akoko North West,lga,,NG-ON-002,active,,xosasx_community_2022
+Ondo,NG-ON,Akoko South East,lga,,NG-ON-003,active,,xosasx_community_2022
+Ondo,NG-ON,Akoko South West,lga,,NG-ON-004,active,,xosasx_community_2022
+Ondo,NG-ON,Akure North,lga,,NG-ON-005,active,,xosasx_community_2022
+Ondo,NG-ON,Akure South,lga,,NG-ON-006,active,,xosasx_community_2022
+Ondo,NG-ON,Ese Odo,lga,,NG-ON-007,active,,xosasx_community_2022
+Ondo,NG-ON,Idanre,lga,,NG-ON-008,active,,xosasx_community_2022
+Ondo,NG-ON,Ifedore,lga,,NG-ON-009,active,,xosasx_community_2022
+Ondo,NG-ON,Ilaje,lga,,NG-ON-010,active,,xosasx_community_2022
+Ondo,NG-ON,Ile Oluji/Okeigbo,lga,,NG-ON-011,active,,xosasx_community_2022
+Ondo,NG-ON,Irele,lga,,NG-ON-012,active,,xosasx_community_2022
+Ondo,NG-ON,Odigbo,lga,,NG-ON-013,active,,xosasx_community_2022
+Ondo,NG-ON,Okitipupa,lga,,NG-ON-014,active,,xosasx_community_2022
+Ondo,NG-ON,Ondo East,lga,,NG-ON-015,active,,xosasx_community_2022
+Ondo,NG-ON,Ondo West,lga,,NG-ON-016,active,,xosasx_community_2022
+Ondo,NG-ON,Ose,lga,,NG-ON-017,active,,xosasx_community_2022
+Ondo,NG-ON,Owo,lga,,NG-ON-018,active,,xosasx_community_2022
+Osun,NG-OS,Aiyedire,lga,,NG-OS-001,active,,xosasx_community_2022
+Osun,NG-OS,Atakunmosa East,lga,,NG-OS-002,active,,xosasx_community_2022
+Osun,NG-OS,Atakunmosa West,lga,,NG-OS-003,active,,xosasx_community_2022
+Osun,NG-OS,Ayedaade,lga,,NG-OS-004,active,,xosasx_community_2022
+Osun,NG-OS,Boluwaduro,lga,,NG-OS-005,active,,xosasx_community_2022
+Osun,NG-OS,Boripe,lga,,NG-OS-006,active,,xosasx_community_2022
+Osun,NG-OS,Ede North,lga,,NG-OS-007,active,,xosasx_community_2022
+Osun,NG-OS,Ede South,lga,,NG-OS-008,active,,xosasx_community_2022
+Osun,NG-OS,Egbedore,lga,,NG-OS-009,active,,xosasx_community_2022
+Osun,NG-OS,Ejigbo,lga,,NG-OS-010,active,,xosasx_community_2022
+Osun,NG-OS,Ife Central,lga,,NG-OS-011,active,,xosasx_community_2022
+Osun,NG-OS,Ife East,lga,,NG-OS-012,active,,xosasx_community_2022
+Osun,NG-OS,Ife North,lga,,NG-OS-013,active,,xosasx_community_2022
+Osun,NG-OS,Ife South,lga,,NG-OS-014,active,,xosasx_community_2022
+Osun,NG-OS,Ifedayo,lga,,NG-OS-015,active,,xosasx_community_2022
+Osun,NG-OS,Ifelodun,lga,,NG-OS-016,active,,xosasx_community_2022
+Osun,NG-OS,Ila,lga,,NG-OS-017,active,,xosasx_community_2022
+Osun,NG-OS,Ilesa East,lga,,NG-OS-018,active,,xosasx_community_2022
+Osun,NG-OS,Ilesa West,lga,,NG-OS-019,active,,xosasx_community_2022
+Osun,NG-OS,Irepodun,lga,,NG-OS-020,active,,xosasx_community_2022
+Osun,NG-OS,Irewole,lga,,NG-OS-021,active,,xosasx_community_2022
+Osun,NG-OS,Isokan,lga,,NG-OS-022,active,,xosasx_community_2022
+Osun,NG-OS,Iwo,lga,,NG-OS-023,active,,xosasx_community_2022
+Osun,NG-OS,Obokun,lga,,NG-OS-024,active,,xosasx_community_2022
+Osun,NG-OS,Odo-Otin,lga,,NG-OS-025,active,,xosasx_community_2022
+Osun,NG-OS,Ola-Oluwa,lga,,NG-OS-026,active,,xosasx_community_2022
+Osun,NG-OS,Olorunda,lga,,NG-OS-027,active,,xosasx_community_2022
+Osun,NG-OS,Oriade,lga,,NG-OS-028,active,,xosasx_community_2022
+Osun,NG-OS,Orolu,lga,,NG-OS-029,active,,xosasx_community_2022
+Osun,NG-OS,Osogbo,lga,,NG-OS-030,active,,xosasx_community_2022
+Oyo,NG-OY,Afijio,lga,,NG-OY-001,active,,xosasx_community_2022
+Oyo,NG-OY,Akinyele,lga,,NG-OY-002,active,,xosasx_community_2022
+Oyo,NG-OY,Atiba,lga,,NG-OY-003,active,,xosasx_community_2022
+Oyo,NG-OY,Atisbo,lga,,NG-OY-004,active,,xosasx_community_2022
+Oyo,NG-OY,Egbeda,lga,,NG-OY-005,active,,xosasx_community_2022
+Oyo,NG-OY,Ibadan North,lga,,NG-OY-006,active,,xosasx_community_2022
+Oyo,NG-OY,Ibadan North East,lga,,NG-OY-007,active,,xosasx_community_2022
+Oyo,NG-OY,Ibadan North West,lga,,NG-OY-008,active,,xosasx_community_2022
+Oyo,NG-OY,Ibadan South East,lga,,NG-OY-009,active,,xosasx_community_2022
+Oyo,NG-OY,Ibadan South West,lga,,NG-OY-010,active,,xosasx_community_2022
+Oyo,NG-OY,Ibarapa Central,lga,,NG-OY-011,active,,xosasx_community_2022
+Oyo,NG-OY,Ibarapa East,lga,,NG-OY-012,active,,xosasx_community_2022
+Oyo,NG-OY,Ibarapa North,lga,,NG-OY-013,active,,xosasx_community_2022
+Oyo,NG-OY,Ido,lga,,NG-OY-014,active,,xosasx_community_2022
+Oyo,NG-OY,Irepo,lga,,NG-OY-015,active,,xosasx_community_2022
+Oyo,NG-OY,Iseyin,lga,,NG-OY-016,active,,xosasx_community_2022
+Oyo,NG-OY,Itesiwaju,lga,,NG-OY-017,active,,xosasx_community_2022
+Oyo,NG-OY,Iwajowa,lga,,NG-OY-018,active,,xosasx_community_2022
+Oyo,NG-OY,Kajola,lga,,NG-OY-019,active,,xosasx_community_2022
+Oyo,NG-OY,Lagelu,lga,,NG-OY-020,active,,xosasx_community_2022
+Oyo,NG-OY,Ogbomosho North,lga,,NG-OY-021,active,,xosasx_community_2022
+Oyo,NG-OY,Ogbomosho South,lga,,NG-OY-022,active,,xosasx_community_2022
+Oyo,NG-OY,Ogo Oluwa,lga,,NG-OY-023,active,,xosasx_community_2022
+Oyo,NG-OY,Olorunsogo,lga,,NG-OY-024,active,,xosasx_community_2022
+Oyo,NG-OY,Oluyole,lga,,NG-OY-025,active,,xosasx_community_2022
+Oyo,NG-OY,Ona Ara,lga,,NG-OY-026,active,,xosasx_community_2022
+Oyo,NG-OY,Oorelope,lga,,NG-OY-027,active,,xosasx_community_2022
+Oyo,NG-OY,Ori Ire,lga,,NG-OY-028,active,,xosasx_community_2022
+Oyo,NG-OY,Oyo East,lga,,NG-OY-029,active,,xosasx_community_2022
+Oyo,NG-OY,Oyo West,lga,,NG-OY-030,active,,xosasx_community_2022
+Oyo,NG-OY,Saki East,lga,,NG-OY-031,active,,xosasx_community_2022
+Oyo,NG-OY,Saki West,lga,,NG-OY-032,active,,xosasx_community_2022
+Oyo,NG-OY,Surulere,lga,,NG-OY-033,active,,xosasx_community_2022
+Plateau,NG-PL,Barkin Ladi,lga,,NG-PL-001,active,,xosasx_community_2022
+Plateau,NG-PL,Bassa,lga,,NG-PL-002,active,,xosasx_community_2022
+Plateau,NG-PL,Bokkos,lga,,NG-PL-003,active,,xosasx_community_2022
+Plateau,NG-PL,Jos East,lga,,NG-PL-004,active,,xosasx_community_2022
+Plateau,NG-PL,Jos North,lga,,NG-PL-005,active,,xosasx_community_2022
+Plateau,NG-PL,Jos South,lga,,NG-PL-006,active,,xosasx_community_2022
+Plateau,NG-PL,Kanam,lga,,NG-PL-007,active,,xosasx_community_2022
+Plateau,NG-PL,Kanke,lga,,NG-PL-008,active,,xosasx_community_2022
+Plateau,NG-PL,Langtang North,lga,,NG-PL-009,active,,xosasx_community_2022
+Plateau,NG-PL,Langtang South,lga,,NG-PL-010,active,,xosasx_community_2022
+Plateau,NG-PL,Mangu,lga,,NG-PL-011,active,,xosasx_community_2022
+Plateau,NG-PL,Mikang,lga,,NG-PL-012,active,,xosasx_community_2022
+Plateau,NG-PL,Pankshin,lga,,NG-PL-013,active,,xosasx_community_2022
+Plateau,NG-PL,Qua'an Pan,lga,,NG-PL-014,active,,xosasx_community_2022
+Plateau,NG-PL,Riyom,lga,,NG-PL-015,active,,xosasx_community_2022
+Plateau,NG-PL,Shendam,lga,,NG-PL-016,active,,xosasx_community_2022
+Plateau,NG-PL,Wase,lga,,NG-PL-017,active,,xosasx_community_2022
+Rivers,NG-RI,Abua-Odual,lga,,NG-RI-001,active,,xosasx_community_2022
+Rivers,NG-RI,Ahoada East,lga,,NG-RI-002,active,,xosasx_community_2022
+Rivers,NG-RI,Ahoada West,lga,,NG-RI-003,active,,xosasx_community_2022
+Rivers,NG-RI,Akuku-Toru,lga,,NG-RI-004,active,,xosasx_community_2022
+Rivers,NG-RI,Andoni,lga,,NG-RI-005,active,,xosasx_community_2022
+Rivers,NG-RI,Asari-Toru,lga,,NG-RI-006,active,,xosasx_community_2022
+Rivers,NG-RI,Bonny,lga,,NG-RI-007,active,,xosasx_community_2022
+Rivers,NG-RI,Degema,lga,,NG-RI-008,active,,xosasx_community_2022
+Rivers,NG-RI,Eleme,lga,,NG-RI-009,active,,xosasx_community_2022
+Rivers,NG-RI,Emohua,lga,,NG-RI-010,active,,xosasx_community_2022
+Rivers,NG-RI,Etche,lga,,NG-RI-011,active,,xosasx_community_2022
+Rivers,NG-RI,Gokana,lga,,NG-RI-012,active,,xosasx_community_2022
+Rivers,NG-RI,Ikwerre,lga,,NG-RI-013,active,,xosasx_community_2022
+Rivers,NG-RI,Khana,lga,,NG-RI-014,active,,xosasx_community_2022
+Rivers,NG-RI,Obio/Akpor,lga,,NG-RI-015,active,,xosasx_community_2022
+Rivers,NG-RI,Ogba/Egbema/Ndoni,lga,,NG-RI-016,active,,xosasx_community_2022
+Rivers,NG-RI,Ogu/Bolo,lga,,NG-RI-017,active,,xosasx_community_2022
+Rivers,NG-RI,Okrika,lga,,NG-RI-018,active,,xosasx_community_2022
+Rivers,NG-RI,Omuma,lga,,NG-RI-019,active,,xosasx_community_2022
+Rivers,NG-RI,Opobo/Nkoro,lga,,NG-RI-020,active,,xosasx_community_2022
+Rivers,NG-RI,Oyigbo,lga,,NG-RI-021,active,,xosasx_community_2022
+Rivers,NG-RI,Port Harcourt,lga,,NG-RI-022,active,,xosasx_community_2022
+Rivers,NG-RI,Tai,lga,,NG-RI-023,active,,xosasx_community_2022
+Sokoto,NG-SO,Binji,lga,,NG-SO-001,active,,xosasx_community_2022
+Sokoto,NG-SO,Bodinga,lga,,NG-SO-002,active,,xosasx_community_2022
+Sokoto,NG-SO,Dange/Shuni,lga,,NG-SO-003,active,,xosasx_community_2022
+Sokoto,NG-SO,Gada,lga,,NG-SO-004,active,,xosasx_community_2022
+Sokoto,NG-SO,Goronyo,lga,,NG-SO-005,active,,xosasx_community_2022
+Sokoto,NG-SO,Gudu,lga,,NG-SO-006,active,,xosasx_community_2022
+Sokoto,NG-SO,Gwadabawa,lga,,NG-SO-007,active,,xosasx_community_2022
+Sokoto,NG-SO,Illela,lga,,NG-SO-008,active,,xosasx_community_2022
+Sokoto,NG-SO,Isa,lga,,NG-SO-009,active,,xosasx_community_2022
+Sokoto,NG-SO,Kebbe,lga,,NG-SO-010,active,,xosasx_community_2022
+Sokoto,NG-SO,Kware,lga,,NG-SO-011,active,,xosasx_community_2022
+Sokoto,NG-SO,Rabah,lga,,NG-SO-012,active,,xosasx_community_2022
+Sokoto,NG-SO,Sabon Birni,lga,,NG-SO-013,active,,xosasx_community_2022
+Sokoto,NG-SO,Shagari,lga,,NG-SO-014,active,,xosasx_community_2022
+Sokoto,NG-SO,Silame,lga,,NG-SO-015,active,,xosasx_community_2022
+Sokoto,NG-SO,Sokoto North,lga,,NG-SO-016,active,,xosasx_community_2022
+Sokoto,NG-SO,Sokoto South,lga,,NG-SO-017,active,,xosasx_community_2022
+Sokoto,NG-SO,Tambuwal,lga,,NG-SO-018,active,,xosasx_community_2022
+Sokoto,NG-SO,Tangaza,lga,,NG-SO-019,active,,xosasx_community_2022
+Sokoto,NG-SO,Tureta,lga,,NG-SO-020,active,,xosasx_community_2022
+Sokoto,NG-SO,Wamako,lga,,NG-SO-021,active,,xosasx_community_2022
+Sokoto,NG-SO,Wurno,lga,,NG-SO-022,active,,xosasx_community_2022
+Sokoto,NG-SO,Yabo,lga,,NG-SO-023,active,,xosasx_community_2022
+Taraba,NG-TA,Ardo Kola,lga,,NG-TA-001,active,,xosasx_community_2022
+Taraba,NG-TA,Bali,lga,,NG-TA-002,active,,xosasx_community_2022
+Taraba,NG-TA,Donga,lga,,NG-TA-003,active,,xosasx_community_2022
+Taraba,NG-TA,Gashaka,lga,,NG-TA-004,active,,xosasx_community_2022
+Taraba,NG-TA,Gassol,lga,,NG-TA-005,active,,xosasx_community_2022
+Taraba,NG-TA,Ibi,lga,,NG-TA-006,active,,xosasx_community_2022
+Taraba,NG-TA,Jalingo,lga,,NG-TA-007,active,,xosasx_community_2022
+Taraba,NG-TA,Karim Lamido,lga,,NG-TA-008,active,,xosasx_community_2022
+Taraba,NG-TA,Kurmi,lga,,NG-TA-009,active,,xosasx_community_2022
+Taraba,NG-TA,Lau,lga,,NG-TA-010,active,,xosasx_community_2022
+Taraba,NG-TA,Sardauna,lga,,NG-TA-011,active,,xosasx_community_2022
+Taraba,NG-TA,Takum,lga,,NG-TA-012,active,,xosasx_community_2022
+Taraba,NG-TA,Ussa,lga,,NG-TA-013,active,,xosasx_community_2022
+Taraba,NG-TA,Wukari,lga,,NG-TA-014,active,,xosasx_community_2022
+Taraba,NG-TA,Yorro,lga,,NG-TA-015,active,,xosasx_community_2022
+Taraba,NG-TA,Zing,lga,,NG-TA-016,active,,xosasx_community_2022
+Yobe,NG-YO,Bade,lga,,NG-YO-001,active,,xosasx_community_2022
+Yobe,NG-YO,Bursari,lga,,NG-YO-002,active,,xosasx_community_2022
+Yobe,NG-YO,Damaturu,lga,,NG-YO-003,active,,xosasx_community_2022
+Yobe,NG-YO,Fika,lga,,NG-YO-004,active,,xosasx_community_2022
+Yobe,NG-YO,Fune,lga,,NG-YO-005,active,,xosasx_community_2022
+Yobe,NG-YO,Geidam,lga,,NG-YO-006,active,,xosasx_community_2022
+Yobe,NG-YO,Gujba,lga,,NG-YO-007,active,,xosasx_community_2022
+Yobe,NG-YO,Gulani,lga,,NG-YO-008,active,,xosasx_community_2022
+Yobe,NG-YO,Jakusko,lga,,NG-YO-009,active,,xosasx_community_2022
+Yobe,NG-YO,Karasuwa,lga,,NG-YO-010,active,,xosasx_community_2022
+Yobe,NG-YO,Machina,lga,,NG-YO-011,active,,xosasx_community_2022
+Yobe,NG-YO,Nangere,lga,,NG-YO-012,active,,xosasx_community_2022
+Yobe,NG-YO,Nguru,lga,,NG-YO-013,active,,xosasx_community_2022
+Yobe,NG-YO,Potiskum,lga,,NG-YO-014,active,,xosasx_community_2022
+Yobe,NG-YO,Tarmuwa,lga,,NG-YO-015,active,,xosasx_community_2022
+Yobe,NG-YO,Yunusari,lga,,NG-YO-016,active,,xosasx_community_2022
+Yobe,NG-YO,Yusufari,lga,,NG-YO-017,active,,xosasx_community_2022
+Zamfara,NG-ZA,Anka,lga,,NG-ZA-001,active,,xosasx_community_2022
+Zamfara,NG-ZA,Bakura,lga,,NG-ZA-002,active,,xosasx_community_2022
+Zamfara,NG-ZA,Birnin Magaji/Kiyaw,lga,,NG-ZA-003,active,,xosasx_community_2022
+Zamfara,NG-ZA,Bukkuyum,lga,,NG-ZA-004,active,,xosasx_community_2022
+Zamfara,NG-ZA,Bungudu,lga,,NG-ZA-005,active,,xosasx_community_2022
+Zamfara,NG-ZA,Gummi,lga,,NG-ZA-006,active,,xosasx_community_2022
+Zamfara,NG-ZA,Gusau,lga,,NG-ZA-007,active,,xosasx_community_2022
+Zamfara,NG-ZA,Kaura Namoda,lga,,NG-ZA-008,active,,xosasx_community_2022
+Zamfara,NG-ZA,Maradun,lga,,NG-ZA-009,active,,xosasx_community_2022
+Zamfara,NG-ZA,Maru,lga,,NG-ZA-010,active,,xosasx_community_2022
+Zamfara,NG-ZA,Shinkafi,lga,,NG-ZA-011,active,,xosasx_community_2022
+Zamfara,NG-ZA,Talata Mafara,lga,,NG-ZA-012,active,,xosasx_community_2022
+Zamfara,NG-ZA,Tsafe,lga,,NG-ZA-013,active,,xosasx_community_2022
+Zamfara,NG-ZA,Zurmi,lga,,NG-ZA-014,active,,xosasx_community_2022

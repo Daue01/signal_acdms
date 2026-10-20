@@ -31,8 +31,10 @@ create table duplicate_flags(flag_id uuid primary key default gen_random_uuid(),
   status text not null default 'open' check(status in('open','confirmed','dismissed')),
   reviewed_by uuid references profiles, created_at timestamptz default now());
 create table sync_log(sync_id uuid primary key default gen_random_uuid(),
-  enumerator_id uuid references profiles, at timestamptz default now(),
-  records_uploaded int, records_failed int, device_info text);
+  enumerator_id uuid references profiles, client_id uuid, at timestamptz default now(),
+  status text not null default 'success' check(status in ('success','failed')),
+  records_uploaded int not null default 0, records_failed int not null default 0,
+  http_status int, error_code text, error_message text, device_info text);
 create table audit_log(audit_id bigserial primary key, table_name text, record_id text,
   action text, changed_by uuid default auth.uid(), changed_at timestamptz default now(),
   old_values jsonb, new_values jsonb);
@@ -101,3 +103,21 @@ create policy df_admin on duplicate_flags for all to authenticated using(role_of
 create policy sl_ins on sync_log for insert to authenticated with check(enumerator_id=auth.uid());
 create policy sl_read on sync_log for select to authenticated using(is_admin() or enumerator_id=auth.uid());
 create policy al_read on audit_log for select to authenticated using(is_admin());
+
+-- Server-observed sync failures are logged through a narrowly scoped function
+-- so inactive/wrong-role users can be diagnosed without receiving data access.
+create function public.log_sync_attempt(
+  p_client_id uuid, p_status text, p_records_uploaded int default 0,
+  p_records_failed int default 0, p_http_status int default null,
+  p_error_code text default null, p_error_message text default null,
+  p_device_info text default null
+) returns void language plpgsql security definer
+set search_path = public, pg_temp as $$
+begin
+  if auth.uid() is null then raise exception 'Authentication required' using errcode = '42501'; end if;
+  if p_status not in ('success','failed') then raise exception 'Invalid sync status' using errcode = '22023'; end if;
+  insert into public.sync_log(enumerator_id,client_id,status,records_uploaded,records_failed,http_status,error_code,error_message,device_info)
+  values(auth.uid(),p_client_id,p_status,greatest(coalesce(p_records_uploaded,0),0),greatest(coalesce(p_records_failed,0),0),p_http_status,left(p_error_code,120),left(p_error_message,1000),left(p_device_info,500));
+end $$;
+revoke all on function public.log_sync_attempt(uuid,text,int,int,int,text,text,text) from public, anon;
+grant execute on function public.log_sync_attempt(uuid,text,int,int,int,text,text,text) to authenticated;

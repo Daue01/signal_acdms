@@ -6,6 +6,9 @@ const migration = await readFile(new URL('../supabase/008_citizen_routing.sql', 
 const roleMigration = await readFile(new URL('../supabase/007a_add_analyst_role.sql', import.meta.url), 'utf8');
 const publicStatusRoute = await readFile(new URL('../src/app/api/citizen/status/route.ts', import.meta.url), 'utf8');
 const geographyPdfRoute = await readFile(new URL('../src/app/api/geography/pdf/route.ts', import.meta.url), 'utf8');
+const syncRoute = await readFile(new URL('../src/app/api/sync/route.ts', import.meta.url), 'utf8');
+const syncMigration = await readFile(new URL('../supabase/010_sync_attempt_logging.sql', import.meta.url), 'utf8');
+const geographyImporter = await readFile(new URL('../scripts/import-geography.mjs', import.meta.url), 'utf8');
 
 test('public submission RPC is not executable by anonymous clients', () => {
   assert.match(migration, /revoke all on function public\.submit_public_citizen_submission[\s\S]*?from public, anon, authenticated;/);
@@ -48,4 +51,18 @@ test('approved records drive indicator aggregates and realtime publication', () 
   assert.match(migration, /create trigger aggregate_individual_insert/);
   assert.match(migration, /create trigger aggregate_indicator_insert/);
   assert.match(migration, /alter publication supabase_realtime add table public\.population_aggregates/);
+});
+
+test('sync failures are centrally logged without claiming offline central logging', () => {
+  assert.match(syncMigration, /create or replace function public\.log_sync_attempt/);
+  assert.match(syncMigration, /status in \('success', 'failed'\)/);
+  assert.match(syncMigration, /revoke all on function public\.log_sync_attempt/);
+  assert.match(syncRoute, /log_sync_attempt/);
+});
+
+test('geography importer is deterministic and refuses synthetic data assumptions', () => {
+  assert.match(geographyImporter, /authoritative State\/LGA\/Ward extract/);
+  assert.match(geographyImporter, /sort\(/);
+  assert.match(geographyImporter, /public\.states/);
+  assert.match(geographyImporter, /public\.wards/);
 });
