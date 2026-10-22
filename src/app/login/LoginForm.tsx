@@ -1,11 +1,12 @@
 'use client';
 
 import {useEffect,useState} from 'react';
+import Image from 'next/image';
 import {supabase,supabaseConfigured} from '@/lib/supabase';
 import {HOME,Role} from '@/lib/roles';
 
 type Portal='citizen'|'enumerator'|'administrator';
-const portalCopy={citizen:{title:'Citizen portal',description:'Create a citizen account with email verification. No administrator approval is needed.',signup:true},enumerator:{title:'Enumerator portal',description:'Capture field data securely, even when the network is unavailable.',signup:true},administrator:{title:'Superadmin portal',description:'Approve enumerators, manage areas and monitor census operations.',signup:false}} as const;
+const portalCopy={citizen:{title:'Citizen portal',description:'Create a citizen account with email verification. No administrator approval is needed.',signup:true},enumerator:{title:'Enumerator portal',description:'Capture field data securely, even when the network is unavailable.',signup:true},administrator:{title:'Admin portal',description:'System administrators manage the full platform; state administrators manage enumerators and areas in their assigned state.',signup:false}} as const;
 
 function authErrorMessage(error:{message?:string}|null):string{
  const message=error?.message??'Authentication failed.';
@@ -33,10 +34,10 @@ export default function LoginForm({portal}:{portal:Portal}){
   if(profileError||!profile)return setError('Your account profile is not ready. Contact the administrator.');
   if(!profile.is_active)return setError('Your account is awaiting administrator approval.');
   const role=profile.role as Role;
-  if(portal==='administrator'&&!['administrator','supervisor'].includes(role))return setError('This account is not an administrator account.');
-  if(portal==='enumerator'&&role!=='enumerator')return setError('This account is not an enumerator account.');
+  if(portal==='administrator'&&!['administrator','state_admin','supervisor'].includes(role))return setError('This account is not an administrator account.');
+  if(portal==='enumerator'&&!['enumerator','state_admin'].includes(role))return setError('This account is not an enumerator account.');
   if(portal==='citizen'&&role!=='citizen')return setError('This account is not a citizen account.');
   location.href=HOME[role];
  }
- return <main className="auth-page"><div className="auth-card"><a href="/" className="brand"><span className="brand-mark">✦</span><span>NAIJA<span className="brand-muted"> / SIGNAL</span></span></a><div className="portal-switch"><a className={portal==='citizen'?'active':''} href="/login/citizen">Citizen</a><a className={portal==='enumerator'?'active':''} href="/login/enumerator">Enumerator</a><a className={portal==='administrator'?'active':''} href="/login/administrator">Admin</a></div><div className="auth-heading"><p className="eyebrow">{copy.title}</p><h1>{signup?'Create your account.':'Welcome back.'}</h1><p>{copy.description}</p></div>{signup&&<input className="auth-input" placeholder="Full name" value={name} onChange={e=>setName(e.target.value)}/>}<input className="auth-input" placeholder="Email address" type="email" value={email} onChange={e=>setEmail(e.target.value)}/><input className="auth-input" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)}/><button className="button button-primary auth-submit" onClick={submit}>{signup?'Create account':'Sign in'} <span>↗</span></button>{error&&<p className="auth-error">{error}</p>}{notice&&<p className="auth-notice">{notice}</p>}{copy.signup&&<button className="auth-switch" onClick={()=>{setSignup(!signup);setError('');setNotice('')}}>{signup?'Already have an account? Sign in':'New here? Create a '+portal+' account'}</button>}<a href="/" className="auth-home">← Back to Naija / Signal</a></div></main>;
+ return <main className="auth-page"><div className="auth-card"><a href="/" className="brand brand-image" aria-label="Naija Signal home"><Image className="brand-logo" src="/naija-signal-logo.png" alt="Naija Signal" width={746} height={334}/></a><div className="portal-switch"><a className={portal==='citizen'?'active':''} href="/login/citizen">Citizen</a><a className={portal==='enumerator'?'active':''} href="/login/enumerator">Enumerator</a><a className={portal==='administrator'?'active':''} href="/login/administrator">Admin</a></div><div className="auth-heading"><p className="eyebrow">{copy.title}</p><h1>{signup?'Create your account.':'Welcome back.'}</h1><p>{copy.description}</p></div>{signup&&<input className="auth-input" placeholder="Full name" value={name} onChange={e=>setName(e.target.value)}/>}<input className="auth-input" placeholder="Email address" type="email" value={email} onChange={e=>setEmail(e.target.value)}/><input className="auth-input" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)}/><button className="button button-primary auth-submit" onClick={submit}>{signup?'Create account':'Sign in'} <span>↗</span></button>{error&&<p className="auth-error">{error}</p>}{notice&&<p className="auth-notice">{notice}</p>}{copy.signup&&<button className="auth-switch" onClick={()=>{setSignup(!signup);setError('');setNotice('')}}>{signup?'Already have an account? Sign in':'New here? Create a '+portal+' account'}</button>}<a href="/" className="auth-home">← Back to Naija / Signal</a></div></main>;
 }

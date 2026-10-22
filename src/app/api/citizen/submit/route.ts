@@ -39,6 +39,7 @@ export async function POST(request:NextRequest){
    water_fetch_minutes:input.waterFetchMinutes,
    cars_owned:input.carsOwned,
    income_band:input.incomeBand,
+   census_responses:input.census_responses,
    individuals:input.individuals,
   };
   const{data,error}=await db().rpc('submit_public_citizen_submission',{

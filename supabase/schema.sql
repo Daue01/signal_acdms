@@ -1,6 +1,6 @@
 -- ACDMS schema: State > LGA > Ward > EA > Household > Individual (aligned to NPC hierarchy)
 create extension if not exists pg_trgm;
-create type user_role as enum ('administrator','supervisor','enumerator','citizen');
+create type user_role as enum ('administrator','state_admin','supervisor','enumerator','citizen');
 
 create table profiles(user_id uuid primary key references auth.users on delete cascade,
   full_name text not null, role user_role not null default 'enumerator',
@@ -15,6 +15,7 @@ create table households(household_id uuid primary key default gen_random_uuid(),
   client_id uuid unique not null,               -- idempotency key from device
   ea_id uuid not null references enumeration_areas, address text not null,
   housing_type text, utilities jsonb default '{}', ownership_status text,
+  census_responses jsonb not null default '{}',
   consent_recorded boolean not null default false, -- NDPA 2023 lawful-basis record
   registered_by uuid references profiles, registered_at timestamptz default now(),
   sync_status text default 'synced');
@@ -24,6 +25,7 @@ create table individuals(individual_id uuid primary key default gen_random_uuid(
   surname text not null, firstname text not null, sex text not null check(sex in('male','female')),
   date_of_birth date, age int check(age between 0 and 120), relationship_to_head text,
   education_level text, occupation text, disability_status text,
+  census_responses jsonb not null default '{}',
   registered_by uuid references profiles);
 
 create table duplicate_flags(flag_id uuid primary key default gen_random_uuid(),

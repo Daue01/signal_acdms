@@ -1,4 +1,5 @@
 import {z} from 'zod';
+import {householdCensusResponsesSchema,individualCensusResponsesSchema} from './censusQuestionnaire';
 
 export const individualSubmissionSchema=z.object({
  surname:z.string().trim().min(1).max(100),
@@ -10,6 +11,7 @@ export const individualSubmissionSchema=z.object({
  education_level:z.string().trim().max(100).optional(),
  occupation:z.string().trim().max(100).optional(),
  disability_status:z.string().trim().max(100).optional(),
+ census_responses:individualCensusResponsesSchema,
 });
 
 export const citizenSubmissionSchema=z.object({
@@ -28,6 +30,7 @@ export const citizenSubmissionSchema=z.object({
  incomeBand:z.string().trim().max(80).optional(),
  latitude:z.number().min(-90).max(90).optional(),
  longitude:z.number().min(-180).max(180).optional(),
+ census_responses:householdCensusResponsesSchema,
  individuals:z.array(individualSubmissionSchema).min(1).max(50),
  consentRecorded:z.literal(true),
  captchaToken:z.string().trim().max(4000).optional().default(''),

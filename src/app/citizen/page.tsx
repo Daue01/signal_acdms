@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect, useState} from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import {RequireRole} from '@/lib/guard';
 import {supabase} from '@/lib/supabase';
@@ -61,7 +62,7 @@ function CitizenDashboardView(){
 
  return <main className={styles.page}>
   <header className={styles.header}>
-   <Link className={styles.brand} href="/">NAIJA <span>/ SIGNAL</span></Link>
+   <Link className={styles.brand} href="/" aria-label="Naija Signal home"><Image src="/naija-signal-logo.png" alt="Naija Signal" width={746} height={334}/></Link>
    <div className={styles.headerActions}>
     <span className={styles.role}>Citizen portal</span>
     <button type="button" onClick={()=>void signOut()}>Sign out</button>
@@ -77,10 +78,10 @@ function CitizenDashboardView(){
   </section>
   {error&&<p className={styles.error} role="alert">{error}</p>}
   <section className={styles.stats} aria-label="Submission summary">
-   <article><span>Total submissions</span><strong>{loading?'—':submissions.length}</strong></article>
-   <article><span>Awaiting review</span><strong>{loading?'—':count('pending')}</strong></article>
-   <article><span>Approved</span><strong>{loading?'—':count('approved')}</strong></article>
-   <article><span>Needs attention</span><strong>{loading?'—':count('rejected')}</strong></article>
+    <article><span>Total submissions</span><strong>{loading?'…':submissions.length}</strong></article>
+    <article><span>Awaiting review</span><strong>{loading?'…':count('pending')}</strong></article>
+    <article><span>Approved</span><strong>{loading?'…':count('approved')}</strong></article>
+    <article><span>Needs attention</span><strong>{loading?'…':count('rejected')}</strong></article>
   </section>
   <section className={styles.submissions}>
    <div className={styles.sectionHeading}>

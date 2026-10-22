@@ -1,7 +1,10 @@
 # Geography import contract
 
 The importer is `scripts/import-official-geography.mjs`. It is a server-side
-PostgreSQL utility; it must never run in the browser.
+PostgreSQL utility; it must never run in the browser. `npm run geography:sync`
+imports the supplied States/LGAs/reference wards from `.env.local` in one
+transaction. It preserves existing matching pilot rows and leaves all
+enumeration areas untouched.
 
 Before importing, create `data/geography/` with these files:
 
@@ -39,16 +42,17 @@ or parent reference is missing. It also rejects duplicate codes.
 The supplied files contain 37 states, 774 LGAs, 7,740 synthetic demo wards, and
 38,700 synthetic demo EAs. The LGA `official_code` values are blank. The ward
 and EA files explicitly identify themselves as synthetic and non-official. To
-use this dataset temporarily, run reference-only plus synthetic-demo mode:
+use this dataset temporarily, run reference-only plus synthetic-demo mode.
+The convenient geography-only command deliberately skips the EA CSV:
 
 ```powershell
-node scripts/import-official-geography.mjs --reference-only --synthetic-demo --replace-demo --dry-run
-node scripts/import-official-geography.mjs --reference-only --synthetic-demo --replace-demo
+npm run geography:sync:dry-run
+npm run geography:sync
 ```
 
 This maps the supplied ISO state code and ACDMS `internal_working_code` into
 `reference_code`, leaves `official_code` null for LGAs, and preserves each
-row's explicit `source_id`/`identifier_source`. Ward and EA rows retain their
+row's explicit `source_id`/`identifier_source`. Ward rows retain their
 explicit `record_type = synthetic` and non-official identifier sources. Do not
 present any of these working or synthetic identifiers as official identifiers.
 
@@ -59,18 +63,36 @@ Run the migration first:
 supabase/011_geography_import_metadata.sql
 ```
 
-Then use a server-only connection string:
+Set these two server-only values in the ignored `.env.local` file. Do not paste
+them into chat or commit them:
 
 ```powershell
-$env:ACDMS_DATABASE_URL = 'postgresql://...'
-node scripts/import-official-geography.mjs --dry-run
-node scripts/import-official-geography.mjs
+ACDMS_DATABASE_URL=postgresql://...
+ACDMS_DATABASE_SSL_CA_FILE=C:\path\to\supabase-ca.crt
 ```
 
-The utility opens one transaction, upserts states, LGAs, wards, and EAs by
-official code, validates parent relationships and imported-code counts, and
-commits only after validation. `--dry-run` always rolls back. Existing EAs are
-not removed or changed merely because they are absent from the source. Use
-`--replace-demo` only to remove rows explicitly marked `record_type =
-'synthetic'`; dependent census rows can intentionally cause that transaction
-to fail rather than be silently deleted.
+Download the CA certificate from Supabase Dashboard → Database Settings →
+SSL Configuration. The importer requires this file so the TLS connection
+verifies the Supabase server certificate; it never logs either the connection
+string or certificate path. After setting these values, run the two commands
+above from the repository root. The dry run validates connectivity and rolls
+back; the sync command commits the reference hierarchy.
+
+The geography-only import merges existing state and LGA rows by their names
+and parent hierarchy, inserts/updates wards in batches, and never deletes or
+changes enumeration areas. `--geography-only` cannot be combined with
+`--replace-demo`. The full importer also supports official coded EA files. It
+validates parent relationships and imported-code counts, and commits only
+after validation. Use `--replace-demo` only when intentionally removing
+enumeration areas explicitly marked `record_type = 'synthetic'`; dependent
+census rows can cause that transaction to fail rather than be silently deleted.
+
+## Application behavior when the database is incomplete
+
+The application checks that Supabase has a complete State/LGA/Ward hierarchy
+before using its IDs in cascading selectors. If the database is empty or
+partially loaded, the app uses the bundled list and reports database counts. If
+the database has the complete demo hierarchy, the app identifies that it is
+synced but its wards are synthetic. In either case, synthetic ward preview
+data cannot be used to create EAs or submit census records; import verified
+official wards before enabling those workflows.

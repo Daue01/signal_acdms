@@ -3,9 +3,11 @@
 import {useEffect, useState, type FormEvent} from 'react';
 import {RequireRole} from '@/lib/guard';
 import {loadAssignedAreas, pendingCount, syncAll, submitOrQueue, type CachedArea} from '@/lib/offline';
-import {validateSubmission, type Individual} from '@/lib/validation';
+import {validateSubmission, type Individual,type IndividualField} from '@/lib/validation';
+import Npc01Questionnaire from '@/components/Npc01Questionnaire';
+import {legacyHousingType,legacyOwnershipStatus,type HouseholdCensusResponses,type IndividualCensusResponses} from '@/lib/censusQuestionnaire';
 
-const blank:Individual={surname:'',firstname:'',sex:''};
+const blank:Individual={surname:'',firstname:'',sex:'',census_responses:{functional_difficulties:{}}};
 const input='border border-gray-300 p-2 rounded w-full bg-white';
 
 function EnumeratorView(){
@@ -15,6 +17,7 @@ function EnumeratorView(){
  const[housing,setHousing]=useState('');
  const[ownership,setOwnership]=useState('');
  const[utilities,setUtilities]=useState<Record<string,boolean>>({water:false,electricity:false,sanitation:false});
+ const[censusResponses,setCensusResponses]=useState<HouseholdCensusResponses>({});
  const[consent,setConsent]=useState(false);
  const[people,setPeople]=useState<Individual[]>([{...blank}]);
  const[msg,setMsg]=useState('');
@@ -40,13 +43,21 @@ function EnumeratorView(){
  },[]);
 
  const ea=areas.find(area=>area.ea_id===eaId);
- const updatePerson=(index:number,key:keyof Individual,value:string|number|undefined)=>
+ const assignedStates=[...new Set(areas.map(area=>area.state))];
+ const updatePerson=(index:number,key:IndividualField,value:string|number|undefined)=>
   setPeople(current=>current.map((person,i)=>i===index?{...person,[key]:value}:person));
+ const updatePersonResponse=<K extends keyof IndividualCensusResponses>(index:number,key:K,value:IndividualCensusResponses[K]|undefined)=>
+  setPeople(current=>current.map((person,i)=>i===index?{...person,census_responses:{...person.census_responses,[key]:value}}:person));
+ const updateHouseholdResponse=<K extends keyof HouseholdCensusResponses>(key:K,value:HouseholdCensusResponses[K]|undefined)=>{
+  setCensusResponses(current=>({...current,[key]:value}));
+  if(key==='building_type')setHousing(legacyHousingType(typeof value==='string'?value:undefined));
+  if(key==='tenure_status')setOwnership(legacyOwnershipStatus(typeof value==='string'?value:undefined));
+ };
 
  async function save(event:FormEvent<HTMLFormElement>){
   event.preventDefault();
   setMsg('');
-  const submission={client_id:crypto.randomUUID(),household:{ea_id:eaId,address:addr,housing_type:housing,ownership_status:ownership,utilities,consent_recorded:consent},individuals:people};
+  const submission={client_id:crypto.randomUUID(),household:{ea_id:eaId,address:addr,housing_type:housing,ownership_status:ownership,utilities,consent_recorded:consent,census_responses:censusResponses},individuals:people};
   const result=validateSubmission(submission);
   if(!result.valid){setMsg(result.errors.join('; '));return}
 
@@ -61,6 +72,7 @@ function EnumeratorView(){
    setHousing('');
    setOwnership('');
    setUtilities({water:false,electricity:false,sanitation:false});
+   setCensusResponses({});
    setConsent(false);
    setPeople([{...blank}]);
   }catch(error){
@@ -82,14 +94,14 @@ function EnumeratorView(){
     <p className="eyebrow">Enumerator workspace</p>
     <h1>Citizen interviews</h1>
     <p>Record household answers on behalf of residents in your assigned area. Interviews can be saved offline and synchronized when you reconnect.</p>
-    <p>{ea?`${ea.ea_code} · ${ea.state} · ${ea.lga} · ${ea.ward}`:'No assigned enumeration area cached'}</p><p><a className="text-link" href="/enumerator/review">Review citizen submissions ↗</a></p>
+    <p>{assignedStates.length?`Assigned state${assignedStates.length>1?'s':''}: ${assignedStates.join(', ')} · ${areas.length} assigned EA${areas.length===1?'':'s'}`:'No assigned enumeration area cached'}</p><p>{ea?`Current EA: ${ea.ea_code} · ${ea.state} · ${ea.lga} · ${ea.ward}`:'Select an assigned EA below.'}</p><p><a className="text-link" href="/enumerator/review">Review citizen submissions ↗</a></p>
    </div>
    <div className={online?'connection online':'connection'}><span/>{online?'Online':'Offline'}<button type="button" onClick={()=>void sync()}>Pending: {pending} · Sync</button></div>
   </div>
   {!areas.length&&<div className="field-alert">No enumeration area is available on this device. Connect once to download your assignment before entering a remote area.</div>}
   <form onSubmit={save}>
    <section className="capture-card">
-    <div className="section-title"><h2>Household details</h2><span>Provided by the respondent</span></div>
+    <div className="section-title"><h2>Household identification and supplementary indicators</h2><span>Provided by the respondent</span></div>
     <label className="field-label">Enumeration area
      <select className={input} required value={eaId} onChange={event=>setEaId(event.target.value)}>
       <option value="">Select assigned area</option>
@@ -99,41 +111,16 @@ function EnumeratorView(){
     <label className="field-label">Household address
      <input className={input} required value={addr} onChange={event=>setAddr(event.target.value)} placeholder="House number, street or local description"/>
     </label>
-    <div className="field-grid">
-     <label className="field-label">Housing type
-      <select className={input} value={housing} onChange={event=>setHousing(event.target.value)}><option value="">Select</option><option>Detached house</option><option>Terrace / flat</option><option>Compound room</option><option>Temporary shelter</option><option>Other</option></select>
-     </label>
-     <label className="field-label">Ownership status
-      <select className={input} value={ownership} onChange={event=>setOwnership(event.target.value)}><option value="">Select</option><option>Owner occupied</option><option>Rented</option><option>Rent free</option><option>Other</option></select>
-     </label>
-    </div>
     <div className="field-label">Utilities available
      <div className="checks">{Object.keys(utilities).map(key=><label key={key}><input type="checkbox" checked={utilities[key]} onChange={event=>setUtilities(current=>({...current,[key]:event.target.checked}))}/>{key}</label>)}</div>
     </div>
    </section>
-   <section className="capture-card">
-    <div className="section-title"><h2>Household members</h2><span>{people.length} member{people.length===1?'':'s'}</span></div>
-    {people.map((person,index)=><div className="person-card" key={index}>
-     <div className="person-heading"><strong>Member {index+1}</strong>{people.length>1&&<button type="button" onClick={()=>setPeople(current=>current.filter((_,i)=>i!==index))}>Remove</button>}</div>
-     <div className="field-grid">
-      <input className={input} required placeholder="Surname" value={person.surname} onChange={event=>updatePerson(index,'surname',event.target.value)}/>
-      <input className={input} required placeholder="First name" value={person.firstname} onChange={event=>updatePerson(index,'firstname',event.target.value)}/>
-      <select className={input} required value={person.sex} onChange={event=>updatePerson(index,'sex',event.target.value)}><option value="">Sex</option><option value="male">Male</option><option value="female">Female</option></select>
-      <input className={input} type="number" min="0" max="120" placeholder="Age" value={person.age??''} onChange={event=>updatePerson(index,'age',event.target.value===''?undefined:+event.target.value)}/>
-      <input className={input} type="date" value={person.date_of_birth??''} onChange={event=>updatePerson(index,'date_of_birth',event.target.value||undefined)}/>
-      <select className={input} value={person.relationship_to_head??''} onChange={event=>updatePerson(index,'relationship_to_head',event.target.value)}><option value="">Relationship</option><option>head</option><option>spouse</option><option>child</option><option>parent</option><option>sibling</option><option>other_relative</option><option>non_relative</option></select>
-      <input className={input} placeholder="Education level" value={person.education_level??''} onChange={event=>updatePerson(index,'education_level',event.target.value)}/>
-      <input className={input} placeholder="Occupation" value={person.occupation??''} onChange={event=>updatePerson(index,'occupation',event.target.value)}/>
-      <input className={`${input} col-span-2`} placeholder="Disability status (optional)" value={person.disability_status??''} onChange={event=>updatePerson(index,'disability_status',event.target.value)}/>
-     </div>
-    </div>)}
-    <button className="add-member" type="button" onClick={()=>setPeople(current=>[...current,{...blank}])}>+ Add household member</button>
-   </section>
-   <label className="consent"><input type="checkbox" required checked={consent} onChange={event=>setConsent(event.target.checked)}/> I confirm the respondent was informed and consents to this interview.</label>
+   <Npc01Questionnaire people={people} householdResponses={censusResponses} inputClass={input} onPersonChange={updatePerson} onPersonResponseChange={updatePersonResponse} onHouseholdResponseChange={updateHouseholdResponse} onAddPerson={()=>setPeople(current=>[...current,{...blank}])} onRemovePerson={index=>setPeople(current=>current.filter((_,i)=>i!==index))}/>
+   <label className="consent"><input type="checkbox" required checked={consent} onChange={event=>setConsent(event.target.checked)}/> I confirm the respondent was informed and consents to this interview, including the optional personal and household questions.</label>
    <button type="submit" disabled={saving} className="button button-primary save-capture">{saving?'Saving interview…':'Save interview'} <span>↗</span></button>
    {msg&&<p className="capture-message" role="status">{msg}</p>}
   </form>
  </main>
 }
 
-export default function Enumerator(){return <RequireRole allow={['enumerator']}><EnumeratorView/></RequireRole>}
+export default function Enumerator(){return <RequireRole allow={['enumerator','state_admin']}><EnumeratorView/></RequireRole>}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive globe centered on Nigeria</title>
+<style>
+  :root { color-scheme: light; --text:#1f2d3d; --btn:#1b6b34; }
+  * { box-sizing:border-box; }
+  html,body { width:100%; height:100%; margin:0; }
+  body { display:grid; place-items:center; overflow:hidden; background:transparent;
+         color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  #globe-wrap { position:relative; width:100%; height:100%; }
+  #globe { width:100%; height:100%; display:block; cursor:grab; touch-action:pan-y; }
+  #globe.dragging { cursor:grabbing; }
+  .controls { position:absolute; right:4%; bottom:4%; display:flex; flex-wrap:wrap;
+               justify-content:center; gap:8px; max-width:92%; }
+  button { border:1px solid #ffffffb8; border-radius:999px; padding:9px 13px;
+           background:var(--btn); color:#fff; font:600 11px system-ui,sans-serif;
+           cursor:pointer; box-shadow:0 5px 20px #16231e26; transition:transform .2s,filter .2s; }
+  button:hover { filter:brightness(1.13); transform:translateY(-2px); }
+  button:focus-visible { outline:3px solid #d9f25b; outline-offset:3px; }
+  #globe-status { position:absolute; top:4%; left:50%; max-width:90%; padding:6px 10px;
+                  transform:translateX(-50%); border-radius:999px; background:#fbfaf6df;
+                  color:#52665b; font-size:10px; text-align:center; }
+  #globe-status:empty { display:none; }
+  @media (max-width:420px) {
+    button { padding:8px 10px; font-size:10px; }
+    .controls { gap:5px; }
+  }
+</style>
+</head>
+<body>
+  <div id="globe-wrap">
+    <canvas id="globe" aria-label="Rotating globe centered on Nigeria"></canvas>
+    <div id="globe-status" role="status" aria-live="polite">Loading globe…</div>
+    <div class="controls">
+      <button id="toggle" type="button">Pause rotation</button>
+      <button id="center" type="button">Center on Nigeria</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script>
+  (function () {
+    var SPIN_SPEED = 0.18;
+    var NIGERIA = [8.7, 9.1];
+    var COLORS = {
+      land: "#d9d9d9", border: "#7d8590", nigeria: "#2f6b2f",
+      nigeriaEdge: "#1d4a1d", grid: "rgba(90,110,130,0.25)", rim: "#8aa0b3"
+    };
+    var canvas = document.getElementById("globe");
+    var ctx = canvas.getContext("2d");
+    var status = document.getElementById("globe-status");
+    if (!window.d3 || !window.topojson || !ctx) {
+      status.textContent = "Globe libraries could not be loaded.";
+      return;
+    }
+    var projection = d3.geoOrthographic().clipAngle(90).precision(0.4);
+    var path = d3.geoPath(projection, ctx);
+    var graticule = d3.geoGraticule10();
+    var sphere = { type: "Sphere" };
+    var rotation = [-NIGERIA[0], -NIGERIA[1], 0];
+    var spinning = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var dragging = false;
+    var animating = false;
+    var countries = [];
+    var nigeria = null;
+    var size = 0;
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var width = canvas.clientWidth;
+      size = Math.min(width, canvas.clientHeight);
+      if (!size) return;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      projection.translate([size / 2, size / 2]).scale(size / 2 - 12);
+      draw();
+    }
+
+    function draw() {
+      if (!size) return;
+      ctx.clearRect(0, 0, size, size);
+      projection.rotate(rotation);
+      var radius = projection.scale();
+      var center = size / 2;
+      var glow = ctx.createRadialGradient(center, center, radius * 0.98, center, center, radius * 1.07);
+      glow.addColorStop(0, "rgba(120,170,230,0.35)");
+      glow.addColorStop(1, "rgba(120,170,230,0)");
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(center, center, radius * 1.07, 0, 2 * Math.PI);
+      ctx.fill();
+
+      var ocean = ctx.createRadialGradient(center - radius * 0.35, center - radius * 0.4, radius * 0.1, center, center, radius);
+      ocean.addColorStop(0, "#f4f8fc");
+      ocean.addColorStop(0.6, "#cfdce9");
+      ocean.addColorStop(1, "#8fa6bd");
+      ctx.beginPath();
+      path(sphere);
+      ctx.fillStyle = ocean;
+      ctx.fill();
+
+      ctx.beginPath();
+      path(graticule);
+      ctx.strokeStyle = COLORS.grid;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+
+      ctx.beginPath();
+      path({ type: "FeatureCollection", features: countries });
+      ctx.fillStyle = COLORS.land;
+      ctx.fill();
+      ctx.strokeStyle = COLORS.border;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+
+      if (nigeria) {
+        ctx.beginPath();
+        path(nigeria);
+        ctx.fillStyle = COLORS.nigeria;
+        ctx.fill();
+        ctx.strokeStyle = COLORS.nigeriaEdge;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      var shade = ctx.createRadialGradient(center, center, radius * 0.7, center, center, radius);
+      shade.addColorStop(0, "rgba(40,70,110,0)");
+      shade.addColorStop(1, "rgba(40,70,110,0.28)");
+      ctx.beginPath();
+      path(sphere);
+      ctx.fillStyle = shade;
+      ctx.fill();
+      ctx.strokeStyle = COLORS.rim;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
+
+    function tick() {
+      if (spinning && !dragging && !animating) rotation[0] += SPIN_SPEED;
+      draw();
+      requestAnimationFrame(tick);
+    }
+
+    function centerNigeria() {
+      var from = rotation.slice();
+      var to = [-NIGERIA[0], -NIGERIA[1], 0];
+      var longitudeDelta = ((to[0] - from[0] + 540) % 360) - 180;
+      var start = performance.now();
+      var duration = 1200;
+      animating = true;
+      (function step(now) {
+        var progress = Math.min(1, (now - start) / duration);
+        var easing = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        rotation = [
+          from[0] + longitudeDelta * easing,
+          from[1] + (to[1] - from[1]) * easing,
+          0
+        ];
+        if (progress < 1) requestAnimationFrame(step);
+        else animating = false;
+      })(start);
+    }
+
+    var last = null;
+    canvas.addEventListener("pointerdown", function (event) {
+      dragging = true;
+      last = [event.clientX, event.clientY];
+      canvas.classList.add("dragging");
+      canvas.setPointerCapture(event.pointerId);
+    });
+    canvas.addEventListener("pointermove", function (event) {
+      if (!dragging || !last) return;
+      rotation[0] += (event.clientX - last[0]) * 0.3;
+      rotation[1] = Math.max(-90, Math.min(90, rotation[1] - (event.clientY - last[1]) * 0.3));
+      last = [event.clientX, event.clientY];
+    });
+    function endDrag() {
+      dragging = false;
+      last = null;
+      canvas.classList.remove("dragging");
+    }
+    canvas.addEventListener("pointerup", endDrag);
+    canvas.addEventListener("pointercancel", endDrag);
+
+    var toggle = document.getElementById("toggle");
+    toggle.textContent = spinning ? "Pause rotation" : "Start rotation";
+    toggle.addEventListener("click", function () {
+      spinning = !spinning;
+      toggle.textContent = spinning ? "Pause rotation" : "Start rotation";
+    });
+    document.getElementById("center").addEventListener("click", centerNigeria);
+    window.addEventListener("resize", resize);
+
+    fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json")
+      .then(function (response) {
+        if (!response.ok) throw new Error("World map request failed: " + response.status);
+        return response.json();
+      })
+      .then(function (world) {
+        countries = topojson.feature(world, world.objects.countries).features;
+        nigeria = countries.find(function (feature) { return +feature.id === 566; }) || null;
+        if (!nigeria) throw new Error("Nigeria was not found in the world map data.");
+        status.textContent = "";
+        draw();
+      })
+      .catch(function (error) {
+        console.error("Failed to load the interactive globe map.", error);
+        status.textContent = "Map data could not be loaded.";
+      });
+
+    resize();
+    requestAnimationFrame(tick);
+  })();
+  </script>
+</body>
+</html>

@@ -9,17 +9,21 @@ export type CachedArea={ea_id:string;ea_code:string;state:string;lga:string;ward
 
 export const queue=(s:Submission)=>set(K(s.client_id),{s,queued_at:new Date().toISOString()});
 export const pendingCount=async()=> (await keys()).filter(k=>String(k).startsWith(QUEUE_PREFIX)).length;
-export const cacheAreas=async(areas:CachedArea[])=>set(AREAS_KEY,areas);
-export const cachedAreas=async():Promise<CachedArea[]>=>(await get(AREAS_KEY))??[];
+const areasKey=(userId:string)=>`${AREAS_KEY}:${userId}`;
+export const cacheAreas=async(userId:string,areas:CachedArea[])=>set(areasKey(userId),areas);
+export const cachedAreas=async(userId:string):Promise<CachedArea[]>=>(await get(areasKey(userId)))??[];
 const withTimeout=async<T>(promise:PromiseLike<T>,ms=7000):Promise<T>=>Promise.race([Promise.resolve(promise),new Promise<T>((_,reject)=>setTimeout(()=>reject(new Error('network timeout')),ms))]);
 
 export async function loadAssignedAreas(){
- if(typeof navigator!=='undefined'&&!navigator.onLine)return cachedAreas();
+ const {data:{session}}=await supabase.auth.getSession();
+ const userId=session?.user.id;
+ if(!userId)return [];
+ if(typeof navigator!=='undefined'&&!navigator.onLine)return cachedAreas(userId);
  try{
-  const {data,error}=await withTimeout(supabase.from('enumeration_areas').select('ea_id,ea_code,state,lga,ward,target_households').order('ea_code')) as any;
+  const {data,error}=await withTimeout(supabase.from('enumeration_areas').select('ea_id,ea_code,state,lga,ward,target_households').eq('assigned_enumerator_id',userId).order('ea_code')) as any;
   if(error||!data)throw error??new Error('Unable to load assigned areas');
-  await cacheAreas(data as CachedArea[]);return data as CachedArea[];
- }catch{return cachedAreas()}
+  await cacheAreas(userId,data as CachedArea[]);return data as CachedArea[];
+ }catch{return cachedAreas(userId)}
 }
 
 async function send(s:Submission,token:string){return fetch('/api/sync',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify(s)})}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { loadDataset, validateDataset } from '../scripts/import-official-geography.mjs';
+import { importRows, loadDataset, validateDatabase, validateDataset } from '../scripts/import-official-geography.mjs';
 
 const source = `Source name: Test authority\nURL: https://example.test/geography.csv\nDownload date: 2026-10-20\nVersion: 1.0\nLicence/reuse terms: Test licence\n`;
 
@@ -46,4 +46,46 @@ test('rejects incomplete source metadata and missing required columns', async ()
   const errors = validateDataset(await loadDataset(dir));
   assert.ok(errors.some(error => error.includes('SOURCE.md')));
   assert.ok(errors.some(error => error.includes('identifier_source')));
+});
+
+test('geography-only mode does not require or modify enumeration areas', async () => {
+  const dir = await fixture({});
+  await fs.rm(path.join(dir, 'enumeration_areas.csv'));
+  const dataset = await loadDataset(dir, { geographyOnly: true });
+  assert.deepEqual(validateDataset(dataset, { geographyOnly: true }), []);
+  assert.deepEqual(dataset.eas.records, []);
+
+  const statements = [];
+  await importRows({ query: async (text) => {
+    statements.push(text);
+    if (text.startsWith('select state_id')) return { rows: [{ state_id: 1 }], rowCount: 1 };
+    return { rows: [], rowCount: 1 };
+  } }, {
+    states: { records: [{ state_code: 'S1', state_name: 'State One', record_type: 'reference', identifier_source: 'authority-1' }] },
+    lgas: { records: [{ lga_code: 'L1', lga_name: 'LGA One', state_code: 'S1', record_type: 'reference', identifier_source: 'authority-1' }] },
+    wards: { records: [{ ward_code: 'W1', ward_name: 'Ward One', lga_code: 'L1', record_type: 'synthetic', identifier_source: 'demo-only' }] },
+    eas: { records: [] },
+  }, false, true, true);
+
+  assert.ok(statements.some(statement => statement.includes("regexp_replace(btrim(name)")));
+  assert.ok(statements.some(statement => statement.startsWith('update public.states')));
+  assert.ok(statements.some(statement => statement.includes('on conflict (state_id,name)')));
+  assert.ok(statements.some(statement => statement.includes('on conflict (lga_id,name)')));
+  assert.ok(statements.every(statement => !statement.includes('enumeration_areas') && !statement.startsWith('delete ')));
+
+  const validationStatements = [];
+  const databaseErrors = await validateDatabase({ query: async (text) => {
+    validationStatements.push(text);
+    if (text.startsWith('select (select count(')) return { rows: [{ count: 0 }] };
+    if (text.includes('count(*)::int as count')) return { rows: [{ count: 1 }] };
+    return { rows: [{ count: 1 }] };
+  } }, {
+    states: { records: [{ state_code: 'S1' }] },
+    lgas: { records: [{ lga_code: 'L1' }] },
+    wards: { records: [{ ward_code: 'W1' }] },
+    eas: { records: [] },
+    geographyOnly: true,
+  }, true);
+  assert.deepEqual(databaseErrors, []);
+  assert.ok(validationStatements.every(statement => !statement.includes('enumeration_areas')));
 });

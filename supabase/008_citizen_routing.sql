@@ -446,36 +446,36 @@ security definer
 set search_path = public, pg_temp
 as $$
 declare
-  h record;
-  i record;
-  ind record;
+  hh_row record;
+  individual_row record;
+  indicator_row record;
 begin
   truncate table public.population_aggregates;
-  for h in
-    select h.household_id, h.ea_id, s.state_id, l.lga_id, w.ward_id
-    from public.households h
-    join public.enumeration_areas ea on ea.ea_id=h.ea_id
+  for hh_row in
+    select hh.household_id, hh.ea_id, s.state_id, l.lga_id, w.ward_id
+    from public.households hh
+    join public.enumeration_areas ea on ea.ea_id=hh.ea_id
     join public.wards w on w.ward_id=ea.ward_id
     join public.lgas l on l.lga_id=w.lga_id
     join public.states s on s.state_id=l.state_id
   loop
-    perform public.bump_population_aggregate(1,0,h.state_id,h.lga_id,h.ward_id,h.ea_id);
+    perform public.bump_population_aggregate(1,0,hh_row.state_id,hh_row.lga_id,hh_row.ward_id,hh_row.ea_id);
   end loop;
-  for i in
-    select i.individual_id, s.state_id, l.lga_id, w.ward_id, h.ea_id
-    from public.individuals i join public.households h on h.household_id=i.household_id
-    join public.enumeration_areas ea on ea.ea_id=h.ea_id join public.wards w on w.ward_id=ea.ward_id
+  for individual_row in
+    select indv.individual_id, s.state_id, l.lga_id, w.ward_id, hh.ea_id
+    from public.individuals indv join public.households hh on hh.household_id=indv.household_id
+    join public.enumeration_areas ea on ea.ea_id=hh.ea_id join public.wards w on w.ward_id=ea.ward_id
     join public.lgas l on l.lga_id=w.lga_id join public.states s on s.state_id=l.state_id
   loop
-    perform public.bump_population_aggregate(0,1,i.state_id,i.lga_id,i.ward_id,i.ea_id);
+    perform public.bump_population_aggregate(0,1,individual_row.state_id,individual_row.lga_id,individual_row.ward_id,individual_row.ea_id);
   end loop;
-  for ind in
-    select hi.*, s.state_id, l.lga_id, w.ward_id, h.ea_id
-    from public.household_indicators hi join public.households h on h.household_id=hi.household_id
-    join public.enumeration_areas ea on ea.ea_id=h.ea_id join public.wards w on w.ward_id=ea.ward_id
+  for indicator_row in
+    select hi.*, s.state_id, l.lga_id, w.ward_id, hh.ea_id
+    from public.household_indicators hi join public.households hh on hh.household_id=hi.household_id
+    join public.enumeration_areas ea on ea.ea_id=hh.ea_id join public.wards w on w.ward_id=ea.ward_id
     join public.lgas l on l.lga_id=w.lga_id join public.states s on s.state_id=l.state_id
   loop
-    perform public.adjust_population_indicators(ind.state_id,ind.lga_id,ind.ward_id,ind.ea_id,ind.electricity_access_type is not null and ind.electricity_access_type <> 'none',coalesce(ind.electricity_hours_per_day,0),ind.water_source in ('piped','borehole','well'),ind.cars_owned,ind.income_band);
+    perform public.adjust_population_indicators(indicator_row.state_id,indicator_row.lga_id,indicator_row.ward_id,indicator_row.ea_id,indicator_row.electricity_access_type is not null and indicator_row.electricity_access_type <> 'none',coalesce(indicator_row.electricity_hours_per_day,0),indicator_row.water_source in ('piped','borehole','well'),indicator_row.cars_owned,indicator_row.income_band);
   end loop;
 end;
 $$;
