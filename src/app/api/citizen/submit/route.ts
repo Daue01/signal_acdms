@@ -1,14 +1,7 @@
 import {createHash} from 'node:crypto';
 import {NextRequest,NextResponse} from 'next/server';
-import {createClient} from '@supabase/supabase-js';
 import {citizenSubmissionSchema} from '@/lib/citizenSubmission';
-
-function db(){
- const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
- const key=process.env.SUPABASE_SERVICE_ROLE_KEY;
- if(!url||!key)throw new Error('Server-side Supabase service key is not configured');
- return createClient(url,key);
-}
+import {getSupabaseServerClient} from '@/lib/supabaseServer';
 
 async function verifyCaptcha(token:string){
  const verifyUrl=process.env.CAPTCHA_VERIFY_URL;
@@ -22,6 +15,8 @@ async function verifyCaptcha(token:string){
 
 export async function POST(request:NextRequest){
  try{
+  const database=getSupabaseServerClient();
+  if(!database)return NextResponse.json({error:'Server-side Supabase is not configured. Add SUPABASE_SECRET_KEY to the deployment environment.'},{status:503});
   const parsed=citizenSubmissionSchema.safeParse(await request.json());
   if(!parsed.success)return NextResponse.json({error:'Please correct the highlighted form fields.',issues:parsed.error.flatten().fieldErrors},{status:400});
   const input=parsed.data;
@@ -42,7 +37,7 @@ export async function POST(request:NextRequest){
    census_responses:input.census_responses,
    individuals:input.individuals,
   };
-  const{data,error}=await db().rpc('submit_public_citizen_submission',{
+  const{data,error}=await database.rpc('submit_public_citizen_submission',{
    p_state_id:input.stateId,p_lga_id:input.lgaId,p_ward_id:input.wardId,
    p_locality:input.locality,p_address:input.address,p_payload:payload,
    p_consent_recorded:input.consentRecorded,p_captcha_verified:captchaVerified,

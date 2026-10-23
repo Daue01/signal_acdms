@@ -4,7 +4,7 @@ Implements prj_ch1-5 design: EA→Household→Individual hierarchy, role-based a
 duplicate flagging for review, audit log, live progress dashboard.
 ## Run
 1. Create a Supabase project; run `supabase/schema.sql`, then `002_hardening.sql`, `003_role_enforcement.sql`, `004_citizen_accounts.sql`, `006_profile_trigger_repair.sql`, `007_citizen_submissions.sql`, `007a_add_analyst_role.sql`, `008_citizen_routing.sql`, `009_refresh_geography.sql`, `010_sync_attempt_logging.sql`, `011_geography_import_metadata.sql`, `012a_add_state_admin_role.sql`, `012b_state_admin_access.sql`, and `supabase/migrations/20261021021600_npc01_questionnaire_responses.sql` in the SQL editor (in that order, on a Supabase branch first). For an existing project that already ran the earlier scripts, run the missing scripts in order. `009_refresh_geography.sql` only refreshes lookup rows from existing EAs; use the reproducible importer below for an authoritative geography extract.
-2. Copy `.env.example` to `.env.local` and fill the URL plus publishable key (the legacy anon key is also supported).
+2. Copy `.env.example` to `.env.local` and fill the public URL plus publishable key (the legacy anon key is also supported). Public household intake also needs the server-only `SUPABASE_URL` and `SUPABASE_SECRET_KEY`; the legacy `SUPABASE_SERVICE_ROLE_KEY` remains supported for existing deployments. Never prefix the secret key with `NEXT_PUBLIC_` or commit it.
 3. `npm install && npm run dev` (production: `npm run build && npm start` behind HTTPS).
 4. The supplied reference files contain 37 states/territories, 774 LGAs, 7,740 synthetic demo wards, and 38,700 synthetic demo EAs. To sync the State/LGA/reference-Ward lists without touching EAs, add the server-only `ACDMS_DATABASE_URL` and `ACDMS_DATABASE_SSL_CA_FILE` values to the ignored `.env.local` file, then run `npm run geography:sync:dry-run` followed by `npm run geography:sync`. The first command rolls back; the second safely merges reference rows and synthetic demo wards, leaving existing EAs untouched. The importer never logs the connection string or CA path. The supplied wards are not official and must not be used for census reporting; the app keeps real record creation/submission disabled until verified ward data is loaded.
 5. In Supabase Auth settings, enable email/password sign-ups and keep email confirmation enabled. Add `http://localhost:3000/auth/callback` (plus the production HTTPS callback URL) under Redirect URLs. In the Confirm signup email template, keep the link as `<a href="{{ .ConfirmationURL }}">Confirm email address</a>`; if using a custom link, do not replace it with `{{ .SiteURL }}` because that always points to the configured Vercel Site URL. Configure a production SMTP provider before relying on email delivery. The app’s callback returns users to the correct portal after confirmation.
@@ -25,6 +25,17 @@ Run `supabase/007a_add_analyst_role.sql` after `007_citizen_submissions.sql`, th
 - administrator assignment controls that can assign or reassign multiple EAs in one state to an active enumerator, with current ownership shown before changes; assignment history, status-change audit records, aggregate-only population counts, small-count suppression, and `pg_trgm` search through the admin console.
 
 The public submission route has a CAPTCHA hook controlled by `CAPTCHA_VERIFY_URL`, `CAPTCHA_SECRET_KEY`, and `CAPTCHA_REQUIRED=true`. Keep CAPTCHA required before production use. The current repository does not contain the requested `docs/EA_MODULE.md`; the existing SQL migrations and application code were used as the compatibility reference.
+
+### Netlify deployment variables
+
+In the Netlify site settings, add these variables for the production deploy context, then redeploy:
+
+- `NEXT_PUBLIC_SUPABASE_URL` — the Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — the browser-safe publishable key
+- `SUPABASE_URL` — the same project URL, server-only
+- `SUPABASE_SECRET_KEY` — the server-only secret key from Supabase Dashboard → Settings → API Keys
+
+Do not put `SUPABASE_SECRET_KEY` in the browser or in source control. `SUPABASE_SERVICE_ROLE_KEY` can be used instead only for a legacy deployment that has not migrated its server key.
 
 ### State administrators
 
