@@ -677,12 +677,12 @@ begin
   select w.name into v_ward from public.wards w where w.ward_id = p_ward_id and w.lga_id = p_lga_id;
   if v_state is null or v_lga is null or v_ward is null then raise exception 'Invalid state, LGA or ward selection' using errcode = '23503'; end if;
 
-  select count(*), min(ea.ea_id) into v_matches, v_ea
+  select count(*), (array_agg(ea.ea_id order by ea.ea_id))[1] into v_matches, v_ea
   from public.enumeration_areas ea
   where ea.ward_id = p_ward_id
     and (nullif(btrim(p_locality), '') is null or lower(ea.ea_code) = lower(btrim(p_locality)));
   if v_matches <> 1 and p_latitude is not null and p_longitude is not null then
-    select count(*), min(ea.ea_id) into v_matches, v_ea
+    select count(*), (array_agg(ea.ea_id order by ea.ea_id))[1] into v_matches, v_ea
     from public.enumeration_areas ea
     where ea.ward_id = p_ward_id
       and ea.geometry is not null

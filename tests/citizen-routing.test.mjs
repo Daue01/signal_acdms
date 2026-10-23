@@ -5,6 +5,8 @@ import test from 'node:test';
 const migration = await readFile(new URL('../supabase/008_citizen_routing.sql', import.meta.url), 'utf8');
 const roleMigration = await readFile(new URL('../supabase/007a_add_analyst_role.sql', import.meta.url), 'utf8');
 const publicStatusRoute = await readFile(new URL('../src/app/api/citizen/status/route.ts', import.meta.url), 'utf8');
+const adminSubmissionQueue = await readFile(new URL('../src/app/admin/AdminResolutionQueue.tsx', import.meta.url), 'utf8');
+const enumeratorReviewPage = await readFile(new URL('../src/app/enumerator/review/page.tsx', import.meta.url), 'utf8');
 const geographyPdfRoute = await readFile(new URL('../src/app/api/geography/pdf/route.ts', import.meta.url), 'utf8');
 const syncRoute = await readFile(new URL('../src/app/api/sync/route.ts', import.meta.url), 'utf8');
 const syncMigration = await readFile(new URL('../supabase/010_sync_attempt_logging.sql', import.meta.url), 'utf8');
@@ -26,6 +28,15 @@ test('submission workflow includes routing and review states', () => {
   }
   assert.match(migration, /resolved_ea_id/);
   assert.match(migration, /assigned_enumerator_id/);
+});
+
+test('admin and enumerator use the same submission workflow', () => {
+  assert.match(adminSubmissionQueue, /\.in\('status',\['needs_admin','pending_enumerator'\]\)/);
+  assert.match(adminSubmissionQueue, /resolve_citizen_submission/);
+  assert.match(adminSubmissionQueue, /reject_citizen_submission/);
+  assert.doesNotMatch(adminSubmissionQueue, /status','pending'/);
+  assert.match(enumeratorReviewPage, /eq\('status','pending_enumerator'\)/);
+  assert.match(enumeratorReviewPage, /review_citizen_submission/);
 });
 
 test('analyst enum migration is isolated before policy use', () => {
