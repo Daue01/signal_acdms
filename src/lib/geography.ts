@@ -60,8 +60,10 @@ async function resolveSource():Promise<GeographySourceResolution>{
    &&(wards.count??0)>=expected.wards
    &&localStates.data.every(state=>names.has(stateKey(state.name)));
   const demoWardCount=syntheticWards.count??0;
-  if(complete&&demoWardCount===0)return {source:'database',states:actualStates};
-  if(complete)console.info('Using bundled reference geography because Supabase includes synthetic wards.');
+  if(complete){
+   if(demoWardCount>0)console.info('Using Supabase geography IDs; synthetic wards remain non-official reference data.');
+   return {source:'database',states:actualStates};
+  }
   else console.warn('Supabase geography is incomplete; using the bundled reference list.',{expected,actual:{states:actualStates.length,lgas:lgas.count??0,wards:wards.count??0}});
   return {source:'local',states:[]};
  })();

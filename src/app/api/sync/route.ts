@@ -7,7 +7,7 @@ import {validateSubmission,Submission} from '@/lib/validation';
 export async function POST(req:NextRequest){
  const token=req.headers.get('authorization')?.replace('Bearer ','');
  if(!token)return NextResponse.json({error:'Authentication required'},{status:401});
- const key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY??process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+ const key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
  if(!process.env.NEXT_PUBLIC_SUPABASE_URL||!key)return NextResponse.json({error:'Supabase is not configured'},{status:503});
  const db=createClient(process.env.NEXT_PUBLIC_SUPABASE_URL,key,{global:{headers:{Authorization:`Bearer ${token}`}}});
  const{data:{user}}=await db.auth.getUser(token);
