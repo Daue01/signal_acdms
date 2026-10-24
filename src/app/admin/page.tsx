@@ -98,10 +98,10 @@ function AdminView(){
 
  async function approveEnumerator(profile:Profile){
   setApproving(profile.user_id);
-  const{error}=await supabase.from('profiles').update({is_active:true}).eq('user_id',profile.user_id).eq('role','enumerator').eq('is_active',false);
-  setMsg(error?.message??`${profile.full_name} approved as an enumerator.`);
+  const{data,error}=await supabase.from('profiles').update({is_active:true}).eq('user_id',profile.user_id).eq('role','enumerator').eq('is_active',false).select('user_id');
+  setMsg(error?.message??((data??[]).length===1?`${profile.full_name} approved as an enumerator.`:`No account status changed for ${profile.full_name}. Refresh the user list and try again.`));
   setApproving(null);
-  if(!error)void load();
+  if(!error&&(data??[]).length===1)void load();
  }
 
  async function createEA(){
@@ -121,12 +121,10 @@ function AdminView(){
   const selectedAreaIds=[...assignmentEAs];
   setAssigning(true);
   try{
-   const{data,error}=await supabase.from('enumeration_areas')
-    .update({assigned_enumerator_id:assignmentEnumerator})
-    .in('ea_id',selectedAreaIds)
-    .select('ea_id');
+   const{data,error}=await supabase.rpc('assign_enumeration_areas',{p_enumerator_id:assignmentEnumerator,p_ea_ids:selectedAreaIds});
    if(error){setMsg(`Could not assign the selected areas: ${error.message}`);return}
-   if((data??[]).length!==selectedAreaIds.length){setMsg(`Only ${(data??[]).length} of ${selectedAreaIds.length} selected areas were updated. Refresh the dashboard and review the assignments.`);return}
+   const updatedCount=Number(data??0);
+   if(updatedCount!==selectedAreaIds.length){setMsg(`Only ${updatedCount} of ${selectedAreaIds.length} selected areas were updated. Refresh the dashboard and review the assignments.`);return}
    setAssignmentEAs([]);
    try{
     const refreshed=await load();

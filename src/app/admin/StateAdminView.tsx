@@ -73,9 +73,10 @@ export default function StateAdminView({stateId}:{stateId:number}){
   }
   setBusy(true);
   try{
-   const{data,error}=await supabase.from('enumeration_areas').update({assigned_enumerator_id:assignee.user_id}).in('ea_id',selectedAreas).select('ea_id');
+   const{data,error}=await supabase.rpc('assign_enumeration_areas',{p_enumerator_id:assignee.user_id,p_ea_ids:selectedAreas});
    if(error){setMessage(`Could not assign the selected areas: ${error.message}`);return}
-   if((data??[]).length!==selectedAreas.length){setMessage(`Only ${(data??[]).length} of ${selectedAreas.length} areas were assigned. Refresh and check the assignments.`);return}
+   const assignedCount=Number(data??0);
+   if(assignedCount!==selectedAreas.length){setMessage(`Only ${assignedCount} of ${selectedAreas.length} areas were assigned. Refresh and check the assignments.`);return}
    const count=selectedAreas.length;
    setSelectedAreas([]);
    setMessage(`${count} area${count===1?'':'s'} assigned to ${assignee.full_name}.`);
